@@ -1,0 +1,17 @@
+name: kora-backend
+
+services:
+  postgres:
+    image: postgres:17.2-alpine3.21
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devuserpassword
+      POSTGRES_DB: kora
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    name: kora_postgres_data

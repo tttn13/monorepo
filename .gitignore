@@ -1,0 +1,9 @@
+# Ignore any IDE folders
+.idea
+
+# Cargo generates these
+debug/
+target/
+
+# Backup files from rustfmt
+**/*.rs.bk

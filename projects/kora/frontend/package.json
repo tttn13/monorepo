@@ -1,0 +1,43 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^4.0.0-beta.0",
+    "@kora/shared-types": "*",
+    "@prisma/client": "^6.3.0",
+    "@schedule-x/calendar-controls": "^2.17.0",
+    "@schedule-x/events-service": "^2.17.0",
+    "@schedule-x/react": "^2.13.3",
+    "@schedule-x/theme-default": "^2.15.0",
+    "axios": "^1.7.9",
+    "date-fns": "^4.1.0",
+    "jwt-decode": "^4.0.0",
+    "next": "15.0.3",
+    "react": "^18.3.1",
+    "react-big-calendar": "^1.17.1",
+    "react-calendar": "^5.1.0",
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.15",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-big-calendar": "^1.16.0",
+    "@types/react-dom": "^18",
+    "daisyui": "^4.12.22",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "postcss": "^8",
+    "prisma": "^6.3.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

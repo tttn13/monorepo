@@ -1,0 +1,45 @@
+node_modules/
+**/node_modules/
+package-lock.json
+**/package-lock.json
+yarn.lock
+**/yarn.lock
+
+# Environment files
+.env
+.env.*
+**/.env
+**/.env.*
+*.env
+# Build directories
+dist/
+build/
+**/dist/
+**/build/
+**/.next/
+
+# OS files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+**/Thumbs.db
+
+# Turbo
+.turbo/
+**/.turbo/
+
+# IDE
+.idea/
+.vscode/
+**/.idea/
+**/.vscode/
+
+# Logs
+*.log
+**/*.log
+npm-debug.log*
+**/npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+**/*.tsbuildinfo
