@@ -40,6 +40,7 @@ function ProfilePage() {
 
             const response = !isRegistered
                 ? await userService.create({
+                    id: -2,
                     authId: organizer.authId,
                     name: organizer.name,
                     email: organizer.email || "",

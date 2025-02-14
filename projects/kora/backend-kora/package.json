@@ -15,7 +15,7 @@
     "@date-fns/tz": "^1.2.0",
     "@koa/cors": "^5.0.0",
     "@koa/router": "^13.1.0",
-    "@kora/shared-types": "*",
+    "@kora/shared-types": "file:../packages/shared-types",
     "@prisma/client": "^6.3.0",
     "@sendgrid/mail": "^8.1.4",
     "body-parser": "^1.20.3",

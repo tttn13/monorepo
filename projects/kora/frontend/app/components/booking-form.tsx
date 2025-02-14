@@ -65,7 +65,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
             <input type="text" className="grow" placeholder="Daisy"
               id="name"
               name="name"
-              value={bookDetails.guestName}
+              value={bookDetails.guestName ?? ''}
               onChange={handleChange}
               required />
           </label>
@@ -77,7 +77,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
               className="grow" placeholder="daisy@site.com" type="email"
               id="email"
               name="email"
-              value={bookDetails.guestEmail}
+              value={bookDetails.guestEmail ?? ''}
               onChange={handleChange}
               required />
           </label>
@@ -86,7 +86,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
           <textarea className="textarea textarea-bordered min-w-full"
             id="notes"
             name="notes"
-            value={bookDetails.guestNotes}
+            value={bookDetails.guestNotes ?? ''}
             onChange={handleChange}
             placeholder="Additional Notes"></textarea>
         </div>

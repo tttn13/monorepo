@@ -18,7 +18,7 @@ export const userService = {
         const response = await api.put<User>(`/user/`, userData);
         return response.data
     },
-    create: async (userData: Omit<User, 'id'>): Promise<User> => {
+    create: async (userData: User): Promise<User> => {
         const response = await api.post<User>(`/user/`, userData);
         return response.data
     },

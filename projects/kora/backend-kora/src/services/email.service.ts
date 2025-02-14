@@ -15,7 +15,11 @@ export const emailService = {
             id: '',
             userId: 0,
             startTime: new Date(),
-            endTime: new Date()
+            endTime: new Date(),
+            guestEmail: null,
+            guestName: null,
+            guestNotes: null,
+            timeZone: null
         }
         
         try {            

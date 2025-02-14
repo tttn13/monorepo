@@ -30,7 +30,8 @@ export const useBookingStore = create<BookingState>()(
           guestEmail: '',
           startTime: new Date(),
           endTime: new Date() || null,
-          guestNotes: ''
+          guestNotes: '',
+          timeZone: null
         },
         isLoading: false,
 
@@ -72,7 +73,8 @@ export const useBookingStore = create<BookingState>()(
               guestEmail: '',
               startTime: new Date(),
               endTime: new Date(),
-              guestNotes: ''
+              guestNotes: '',
+              timeZone: null
             },
             isLoading: false
           });

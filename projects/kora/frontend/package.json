@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify-build": "next build && ls -l .next/standalone && test -f .next/standalone/server.js",
+    "debug-build": "next build && echo 'Build Contents:' && find .next -type f"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.0.0-beta.0",
-    "@kora/shared-types": "*",
+    "@kora/shared-types": "file:./packages/shared-types",
     "@prisma/client": "^6.3.0",
     "@schedule-x/calendar-controls": "^2.17.0",
     "@schedule-x/events-service": "^2.17.0",

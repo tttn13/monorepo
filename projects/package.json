@@ -18,6 +18,9 @@
   "packageManager": "npm@10.9.2",
   "workspaces": [
     "kora/*",
-    "packages/*"
+    "packages/*",
+    "packages/shared-types",
+    "kora/frontend",
+    "kora/backend-kora"
   ]
 }

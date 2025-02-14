@@ -6,13 +6,14 @@ export interface User {
   authId: string;
 }
 
+
 export interface Booking {
   id: string;
   userId: number;
-  guestEmail?: string;
-  guestName?: string;
-  guestNotes?: string;
+  guestEmail: string | null;  
+  guestName: string | null;  
+  guestNotes: string | null; 
   startTime: Date;
   endTime: Date;
-  timeZone?: string;
+  timeZone: string | null;    
 }

@@ -37,8 +37,11 @@ export const userController = {
   async createUser(ctx: Context) {
     try {
       const data = ctx.request.body as {
+        id: number;
+        authId: string;
         name: string;
         email: string;
+        photo: string
       }
       const user = await userService.createUser(data)
       ctx.body = user
