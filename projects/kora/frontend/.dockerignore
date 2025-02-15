@@ -32,10 +32,6 @@ dist/
 .env.production.local
 
 # Development configs
-*.config.js
-*.config.ts
-next.config.js
-next.config.ts
 postcss.config.js
 tailwind.config.js
 jest.config.js
@@ -80,8 +76,6 @@ Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
-tsconfig.json
-tsconfig.*.json
 
 # Temporary files
 *.log

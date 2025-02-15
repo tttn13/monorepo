@@ -7,7 +7,6 @@ import { userRouter } from './routes/user.routes'
 import { bookingRouter } from './routes/booking.routes'
 import { prisma } from './lib/prigma'
 import 'dotenv/config'
-import { jwtCheck } from './middleware/auth'
 import { checkBucketPolicy, checkMinIO, setBucketPublicPolicy } from './lib/minio';
 
 async function testConnection() {
@@ -30,7 +29,7 @@ const app = new Koa()
 
 // app.use(bodyParser())
 app.use(cors({
-  origin: 'http://localhost:3000', // Your frontend URL
+  origin: 'http://localhost:3002', 
   credentials: true,
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization'],
@@ -40,7 +39,7 @@ app.use(bodyParser({ multipart: true }));
 const router = new Router()
 
 router.use('/api/user', userRouter.routes())
-router.use('/api/booking', jwtCheck, bookingRouter.routes())
+router.use('/api/booking', bookingRouter.routes())
 
 app.use(router.routes())
 app.use(router.allowedMethods())
@@ -48,8 +47,9 @@ app.use(router.allowedMethods())
 
 
 testConnection().then(() => {
-  app.listen(3001, () => {
-    console.log('Server running on port 3001')
+  const port = process.env.PORT || 3004
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`)
   })
   checkMinIO()
   setBucketPublicPolicy();

@@ -4,7 +4,7 @@ import React, { useState, FormEvent, useEffect } from 'react'
 import { useBookingStore } from '../store/bookingStore'
 import { useRouter } from 'next/navigation'
 import { bookingService } from '../../services/api/bookingService';
-import { timeService } from '@/services/utils/timeService'
+import { timeService } from '../../services/utils/timeService'
 import { useUserStore } from '../store/userStore'
 
 export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
@@ -31,7 +31,9 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
     setSubmitting(true)
+
     bookDetails.startTime = timeService.createStartTime(bookDetails.startTime, timeSlot);
 
     bookDetails.endTime = timeService.calculateEndTime(bookDetails.startTime, duration);
@@ -39,20 +41,20 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
     if (organizer) {
       bookDetails.userId = organizer.id
     }
-   
-    if (isOrganizer) {
-      var createdBook = await bookingService.create(bookDetails);
-      updateFormData(createdBook)
-    } else {
-      var updated = await bookingService.update(bookDetails);
-      updateFormData(updated)
-    }
+    
+    var createdBook = isOrganizer ? await bookingService.create(bookDetails) : await bookingService.update(bookDetails);
+    
+    updateFormData(createdBook)
+    
     setSubmitting(false)
+    
     router.push('/confirmation');
   }
 
   useEffect(() => {
-    resetStore()
+    if (isOrganizer) {
+      resetStore()
+    }
   }, []);
 
   return (
@@ -65,7 +67,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
             <input type="text" className="grow" placeholder="Daisy"
               id="name"
               name="name"
-              value={bookDetails.guestName ?? ''}
+              value={bookDetails.guestName || ''}
               onChange={handleChange}
               required />
           </label>
@@ -77,7 +79,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
               className="grow" placeholder="daisy@site.com" type="email"
               id="email"
               name="email"
-              value={bookDetails.guestEmail ?? ''}
+              value={bookDetails.guestEmail || ''}
               onChange={handleChange}
               required />
           </label>
@@ -86,7 +88,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
           <textarea className="textarea textarea-bordered min-w-full"
             id="notes"
             name="notes"
-            value={bookDetails.guestNotes ?? ''}
+            value={bookDetails.guestNotes || ''}
             onChange={handleChange}
             placeholder="Additional Notes"></textarea>
         </div>

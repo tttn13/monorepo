@@ -19,7 +19,6 @@ yarn.lock
 # Environment and secrets
 .env
 .env.*
-*.env
 .env.local
 .env.development
 .env.test
@@ -31,12 +30,8 @@ build/
 *.tsbuildinfo
 
 # Development configs
-*.config.js
-*.config.ts
 nodemon.json
 pm2.config.js
-tsconfig.json
-tsconfig.*.json
 .eslintrc*
 .prettierrc*
 .editorconfig

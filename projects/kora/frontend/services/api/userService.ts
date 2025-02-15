@@ -1,17 +1,15 @@
-import { api } from './axios'
-import type { User } from '@kora/shared-types';
+import { api,publicApi } from './axios'
+import type { User } from '../../types/shared-types';
 import axios from 'axios';
+
 export const userService = {
     verify: async (authId: string): Promise<User> => {
-        const response = await api.get<User>(`/user/auth/${authId}`);
+        const response = await publicApi.get<User>(`/user/auth/${authId}`);
         return response.data
     },
-    getOrganizerName: async (id: number): Promise<string> => {
-        const response = await api.get<User>(`/username/id=${id}`);
-        return response.data.name
-    },
+
     get: async (id: number): Promise<User> => {
-        const response = await api.get<User>(`/user/${id}`);
+        const response = await publicApi.get<User>(`/user/${id}`);
         return response.data
     },
     update: async (userData: Omit<User, 'id'>): Promise<User> => {

@@ -22,14 +22,6 @@
         "name": "next"
       }
     ],
-    "paths": {
-      "@kora/shared-types": [
-        "../packages/shared-types/src"
-      ],
-      "@/*": [
-        "./*"
-      ]
-    },
     "typeRoots": [
       "./types",
       "./node_modules/@types"

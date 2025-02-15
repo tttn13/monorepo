@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import type { Booking } from '@kora/shared-types';
+import type { Booking } from '../../types/shared-types';
 import { bookingService } from '../../services/api/bookingService';
 import { useNextCalendarApp, ScheduleXCalendar } from '@schedule-x/react'
 import {
@@ -12,7 +12,7 @@ import {
 } from '@schedule-x/calendar'
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 import '@schedule-x/theme-default/dist/index.css'
-import { timeService } from '@/services/utils/timeService'
+import { timeService } from '../../services/utils/timeService'
 import { format} from 'date-fns';
 import { useUserStore } from '../store/userStore';
 

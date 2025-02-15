@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 import { sign, verify, decode, JsonWebTokenError } from 'jsonwebtoken';
-import type { User, Booking } from '@kora/shared-types';
+import type { Booking } from '.././lib/types';
 
 const resend = new Resend(process.env.RESEND_API);
 
@@ -42,7 +42,6 @@ export const emailService = {
             startTime: new Date(verified.startTime),
             endTime: new Date(verified.endTime)
         };
-        
         return booking;
     },
 

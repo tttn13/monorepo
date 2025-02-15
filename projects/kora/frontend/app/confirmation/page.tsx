@@ -47,8 +47,8 @@ function Confirmation() {
                             eventDate={bookDetails.startTime}
                             organizer={organizer}
                             duration={duration}
-                            email={bookDetails.guestEmail ?? ""}
-                            name={bookDetails.guestName ?? ""} />
+                            email={bookDetails.guestEmail || ""}
+                            name={bookDetails.guestName || ""} />
                     </div></main>
             </div>
         )

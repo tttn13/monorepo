@@ -1,7 +1,7 @@
 'use client'
 import { useBookingStore } from '../store/bookingStore'
 import { FormEvent, useEffect, useState } from 'react';
-import { timeService } from '@/services/utils/timeService'
+import { timeService } from '../../services/utils/timeService'
 
 const lengths: number[] = [
     15, 30, 45, 60, 120, 0

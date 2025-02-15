@@ -1,5 +1,5 @@
 import { prisma } from '../lib/prigma'
-import type { Booking } from '@kora/shared-types';
+import type { Booking } from '.././lib/types';
 
 export const bookingService = {
     async getBooking(bookingid: string) {
@@ -16,7 +16,7 @@ export const bookingService = {
 
     async createBooking(data: Booking) {
         const { id, startTime, endTime, guestEmail, ...bookingData } = data;
-       
+
         return prisma.booking.create({
             data: {
                 ...bookingData,
@@ -27,12 +27,29 @@ export const bookingService = {
         })
     },
 
+    // async updateBooking(data: {
+    //     id: string,
+    //     userId: number,
+    //     guestName: string | null,
+    //     guestEmail: string,
+    //     guestNotes: string,
+    //     startTime: Date,
+    //     endTime: Date;
+    //     timeZone: string
+    // }) {
     async updateBooking(data: Booking) {
         const { id, ...updateData } = data;
 
         return prisma.booking.update({
-            where: { id: id },
-            data: updateData
+            where: { id },
+            data: {
+                guestName: data.guestName ? data.guestName : "",
+                guestEmail: data.guestEmail,
+                guestNotes: data.guestNotes,
+                startTime: data.startTime,
+                endTime: data.endTime,
+                timeZone: data.timeZone == "" ? "" : data.timeZone
+            }
         });
     },
 

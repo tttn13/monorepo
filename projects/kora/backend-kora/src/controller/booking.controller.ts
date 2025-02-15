@@ -2,14 +2,12 @@ import { Context } from 'koa'
 import { bookingService } from '../services/booking.service'
 import { userService } from '../services/user.service';
 import { emailService } from '../services/email.service';
-import type { Booking } from '@kora/shared-types';
+import type { Booking } from '.././lib/types';
 
 export const bookingController = {
   async verify(ctx: Context) {
     try {
-
       const token = ctx.query.token as string;
-
       if (!token) {
         ctx.status = 400;
         ctx.body = { error: 'No token provided' };
@@ -19,13 +17,14 @@ export const bookingController = {
       const bookingData = emailService.verifyBookingToken(token) as Booking;
 
       const booking = await bookingService.getBooking(bookingData.id);
-
       if (!booking) {
+
         ctx.status = 404;
         ctx.body = { error: 'Booking not found' };
         return;
       }
       ctx.body = booking;
+
     } catch (error) {
       ctx.status = 401;
       ctx.body = {
@@ -55,6 +54,7 @@ export const bookingController = {
       const bookLink = emailService.createBookingLink(booking);
 
       const content = 'Appoinment created ! Click link to update'
+
       await emailService.send(organizer?.email, bookLink, content);
 
       if (booking.guestEmail) {
@@ -74,11 +74,11 @@ export const bookingController = {
       const booking = await bookingService.updateBooking(data)
       const bookLink = emailService.createBookingLink(booking);
       const organizer = await userService.getUser(booking.userId);
-     
+
       if (!organizer) {
         throw new Error('Organizer not found');
       }
-     
+
       const content = 'Appoinment updated ! Click link for details'
       await emailService.send(organizer?.email, bookLink, content);
 

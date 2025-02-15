@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  zucalbackend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    image: kora-backend-runner
+    env_file:
+      - ./.env
+    container_name: zucalbackend
+    ports:
+      - "3001:3001"
+    networks:
+      - zucal
+
+networks:
+  zucal:
+    external: true

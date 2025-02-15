@@ -1,9 +1,13 @@
-import { api } from './axios'
-import type { Booking } from '@kora/shared-types';
+import { api,publicApi } from './axios'
+import type { Booking } from '../../types/shared-types';
 
 export const bookingService = {
-    verify: async (token: string) : Promise<Booking> => {
-        const response = await api.get<Booking>(`/booking/verify?token=${token}`);
+    verify: async (token: string): Promise<Booking> => {
+        console.log('verifying')
+        console.log('using publicapi')
+        const response = await publicApi.get<Booking>(`/booking/auth?token=${token}`);
+        // const response = await publicApi.get<Booking>(`/booking/verify?token=${token}`);
+        console.log(`publicApi is ${publicApi.getUri}`)
         return response.data
     },
     get: async (id: string): Promise<Booking> => { 
@@ -15,7 +19,7 @@ export const bookingService = {
         return response.data
     },
     update: async (event: Booking): Promise<Booking> => {
-        const response = await api.put<Booking>(`/booking/}`, event);
+        const response = await publicApi.put<Booking>(`/booking/}`, event);
         return response.data
     },
     create: async (event: Omit<Booking, 'id'>): Promise<Booking> => {

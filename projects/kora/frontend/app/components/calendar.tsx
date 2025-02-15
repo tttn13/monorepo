@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useBookingStore } from '../store/bookingStore'
-import { timeService } from '@/services/utils/timeService'
+import { timeService } from '../../services/utils/timeService'
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];

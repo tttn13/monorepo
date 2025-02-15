@@ -6,7 +6,6 @@ import { useUserStore } from '../store/userStore'
 import React, { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { getAccessToken } from "@auth0/nextjs-auth0"
-import { userService } from '@/services/api/userService';
 import Loader from './loader';
 
 export function withRegistrationCheck<P extends object>(

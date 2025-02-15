@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { userService } from '@/services/api/userService';
+import { userService } from '../../services/api/userService';
 
 export default function UploadPhoto() {
   const [file, setFile] = useState<File | null>(null);

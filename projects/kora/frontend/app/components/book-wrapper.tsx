@@ -2,14 +2,14 @@
 
 import { useSearchParams } from 'next/navigation';
 import { bookingService } from '../../services/api/bookingService'
-import { userService } from '@/services/api/userService';
+import { timeService } from '../../services/utils/timeService'
+import { userService } from '../../services/api/userService';
 import CalendarView from '../components/calendar'
 import BookingForm from '../components/booking-form'
 import TimeSlotSelector from '../components/timeslot-selector'
 import EventLength from '../components/event-length'
 import { useEffect, useState } from 'react';
 import { useBookingStore } from '../store/bookingStore'
-import { timeService } from '@/services/utils/timeService'
 
 export default function BookingPageWrapper() {
   const [hostName, setHostName] = useState<string>("Host Name")
@@ -24,34 +24,42 @@ export default function BookingPageWrapper() {
     const verifyBooking = async (token: string) => {
 
       resetStore();
-
+      console.log('verifyBooking')
       const response = await bookingService.verify(token);
 
-      if (response) {
-        const organizer = await userService.get(response.userId);
-
-        setHostName(organizer.name);
-        setPhoto(organizer.photo)
-        setBookDetails({
-          id: response.id,
-          userId: response.userId,
-          guestEmail: response.guestEmail ?? "",
-          endTime: response.endTime,
-          startTime: response.startTime,
-          guestName: response.guestName ?? "",
-          guestNotes: response.guestNotes ?? ""
-        })
-
-        if (response.startTime && response.endTime) {
-          {
-            const mins = timeService.getDurationInMins(response?.endTime, response?.startTime)
-            setDuration(mins)
-          }
-          setTimeSlot(timeService.getTimeOnly(response?.startTime))
-        }
-        return (response)
+      if (!response) {
+        console.error('Verification failed: No response received');
+        return;
       }
+
+      const organizer = await userService.get(response.userId);
+      if (!response) {
+        console.error(' No organizer received');
+        return;
+      }
+      setHostName(organizer.name);
+      setPhoto(organizer.photo)
+      setBookDetails({
+        id: response.id,
+        userId: response.userId,
+        guestEmail: response?.guestEmail || "",
+        endTime: response.endTime,
+        startTime: response.startTime,
+        guestName: response.guestName || "",
+        guestNotes: response.guestNotes || "",
+        timeZone: ""
+      })
+
+      if (response.startTime && response.endTime) {
+        {
+          const mins = timeService.getDurationInMins(response?.endTime, response?.startTime)
+          setDuration(mins)
+        }
+        setTimeSlot(timeService.getTimeOnly(response?.startTime))
+      }
+      return (response)
     }
+
     const token = searchParams.get('token')?.split('!')[0];
 
     if (!token) {

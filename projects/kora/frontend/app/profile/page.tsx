@@ -5,13 +5,12 @@ import MenuDrawer from '../components/menu-drawer'
 import Topbar from '../components/topbar';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { userService } from '@/services/api/userService';
+import { userService } from '../../services/api/userService';
 import { withRegistrationCheck } from '../components/withRegistrationCheck';
 
 function ProfilePage() {
     const { organizer, setOrganizer, isRegistered } = useUserStore();
     const searchParams = useSearchParams();
-    const completeRegistration = searchParams.get('state') === '';
     const modalRef = useRef<HTMLDialogElement | null>(null);
     const [file, setFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);

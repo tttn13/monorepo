@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import { userService } from '../../services/api/userService';
-import type { User } from '@kora/shared-types';
+import type { User } from '../../types/shared-types';
 
 interface UserState {
     organizer: User;

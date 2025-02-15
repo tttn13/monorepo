@@ -1,11 +1,8 @@
 import axios from 'axios';
 import { getAccessToken} from "@auth0/nextjs-auth0"
-import { auth0 } from "@/lib/auth0"
-import { jwtDecode } from 'jwt-decode';
-import { useUserStore } from '../../app/store/userStore'; 
 
 export const api = axios.create({
-    baseURL: 'http://localhost:3001/api',
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -14,6 +11,15 @@ export const api = axios.create({
 
 api.interceptors.request.use(async (config) => {
     const token = await getAccessToken()
-    config.headers.Authorization = `Bearer ${token}`;  
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;  
+    }
     return config;
+});
+
+export const publicApi = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });

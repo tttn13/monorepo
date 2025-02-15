@@ -6,7 +6,7 @@ export const userRouter = new Router();
 userRouter.get('/presign', jwtCheck, userController.getPresignedUrl);
 userRouter.post('/complete', userController.complete);
 
-userRouter.get('/:id', jwtCheck, userController.getUser)
+userRouter.get('/:id', userController.getUser)
 userRouter.get('/auth/:id', userController.verifyUser)
 
 userRouter.post('/', jwtCheck, userController.createUser)

@@ -1,5 +1,5 @@
-import type { User, Booking } from '@kora/shared-types';
-import { timeService } from '@/services/utils/timeService'
+import type { User, Booking } from '../../types/shared-types';
+import { timeService } from '../../services/utils/timeService'
 
 type Props = {
     eventDate: Date;
