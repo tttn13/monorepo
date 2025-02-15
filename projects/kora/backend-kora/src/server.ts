@@ -29,7 +29,7 @@ const app = new Koa()
 
 // app.use(bodyParser())
 app.use(cors({
-  origin: 'http://localhost:3002', 
+  origin: 'http://localhost:3000', 
   credentials: true,
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization'],

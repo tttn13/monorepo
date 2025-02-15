@@ -1,13 +1,19 @@
-import { api,publicApi } from './axios'
+import { api } from './axios'
 import type { Booking } from '../../types/shared-types';
+import axios from 'axios';
+
+const otherApi = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
 
 export const bookingService = {
     verify: async (token: string): Promise<Booking> => {
-        console.log('verifying')
-        console.log('using publicapi')
-        const response = await publicApi.get<Booking>(`/booking/auth?token=${token}`);
+        console.log(`verifying, api url is ${process.env.NEXT_PUBLIC_API_URL}`)
+        const response = await otherApi.get<Booking>(`/booking/auth?token=${token}`);
         // const response = await publicApi.get<Booking>(`/booking/verify?token=${token}`);
-        console.log(`publicApi is ${publicApi.getUri}`)
         return response.data
     },
     get: async (id: string): Promise<Booking> => { 
@@ -19,7 +25,7 @@ export const bookingService = {
         return response.data
     },
     update: async (event: Booking): Promise<Booking> => {
-        const response = await publicApi.put<Booking>(`/booking/}`, event);
+        const response = await otherApi.put<Booking>(`/booking/}`, event);
         return response.data
     },
     create: async (event: Omit<Booking, 'id'>): Promise<Booking> => {

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zucalweb:
-    image: kora-frontend-runner
+    image: kora-frontend
     container_name: zucalweb
     ports:
       - "3000:3000"

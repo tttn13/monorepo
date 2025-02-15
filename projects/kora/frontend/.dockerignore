@@ -21,8 +21,6 @@ dist/
 .gitlab/
 
 # Environment and secrets
-.env
-.env.*
 .env.local
 .env.development
 .env.development.local

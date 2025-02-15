@@ -2,7 +2,7 @@ version: '3'
 
 services:
   zucalbackend:
-    image: kora-backend-runner
+    image: kora-backend
     container_name: zucalbackend
     ports:
       - "3001:3001"

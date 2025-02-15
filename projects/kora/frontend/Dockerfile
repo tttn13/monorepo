@@ -43,7 +43,7 @@ RUN npm install --omit=dev
 ENV PORT=3000
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-
+ENV NEXT_PUBLIC_API_URL=http://localhost:3001/api
 # Expose port
 EXPOSE 3000
 
