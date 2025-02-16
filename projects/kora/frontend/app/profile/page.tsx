@@ -15,15 +15,16 @@ function ProfilePage() {
     const [file, setFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);
     const [previewUrl, setPreviewUrl] = useState<string>('');
+    const [loading, setLoading] = useState(false);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
 
             const MAX_FILE_SIZE = 1.5 * 1024 * 1024; // 2MB in bytes
-            
+
             if (!file || file.size >= MAX_FILE_SIZE) return;
-            
+
             const objectUrl = URL.createObjectURL(file);
 
             setPreviewUrl(objectUrl);
@@ -31,8 +32,12 @@ function ProfilePage() {
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
+        
         e.preventDefault()
+
         try {
+            setLoading(true)
+
             if (previewUrl) {
                 await handleUpload()
             }
@@ -46,10 +51,12 @@ function ProfilePage() {
                     photo: organizer.photo || ""
                 })
                 : await userService.update(organizer);
-            console.log("updating user")
-            updateRegistered(true)
             
+            updateRegistered(true)
+
             setOrganizer(response)
+
+            setLoading(false)
 
         } catch (error) {
             console.log('Failed to update user from page')
@@ -180,6 +187,7 @@ function ProfilePage() {
                                         onChange={(e) => setOrganizer({ ...organizer, email: e.target.value })}
                                     />
                                 </label>
+                                {loading && <span className="loading loading-dots loading-lg"></span>}
                                 <button type="submit" className="btn btn-primary m-4">{uploading
                                     ? 'Uploading...'
                                     : 'Save'}</button>

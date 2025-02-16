@@ -32,7 +32,7 @@ export default function Login() {
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <div className="mt-10 text-center text-sm/6 text-white  text-opacity-50">
               No account ?
-              <a href="/auth/login?screen_hint=signup" className="font-semibold text-indigo-600 hover:text-indigo-500">
+              <a href={`/auth/login?returnTo=${encoded}`} className="font-semibold text-indigo-600 hover:text-indigo-500">
               <Loginlogin text="Sign up"/>
               </a>
             </div>
