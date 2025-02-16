@@ -9,7 +9,7 @@ import { userService } from '../../services/api/userService';
 import { withRegistrationCheck } from '../components/withRegistrationCheck';
 
 function ProfilePage() {
-    const { organizer, setOrganizer, isRegistered } = useUserStore();
+    const { organizer, setOrganizer, isRegistered, updateRegistered } = useUserStore();
     const searchParams = useSearchParams();
     const modalRef = useRef<HTMLDialogElement | null>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -46,7 +46,9 @@ function ProfilePage() {
                     photo: organizer.photo || ""
                 })
                 : await userService.update(organizer);
-
+            
+            updateRegistered(true)
+            
             setOrganizer(response)
 
         } catch (error) {
@@ -103,7 +105,7 @@ function ProfilePage() {
         if (organizer.id != -1) {
             getUser()
         }
-    }, []);
+    }, [isRegistered]);
 
     useEffect(() => {
         // return () => {
