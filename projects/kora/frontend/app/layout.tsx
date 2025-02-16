@@ -7,8 +7,8 @@ const inter = Inter({ subsets: ['latin'] })
 const playwrite = Playwrite_IN()
 const os = Open_Sans({ subsets: ['latin'] })
 export const metadata: Metadata = {
-  title: 'Better Calendly Clone',
-  description: 'A booking and scheduling tool that\'s better than Calendly',
+  title: 'Calendar',
+  description: 'A booking and scheduling tool that\'s superior',
 }
 
 export default function RootLayout({

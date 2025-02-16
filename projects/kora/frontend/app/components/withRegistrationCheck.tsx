@@ -62,6 +62,7 @@ export function withRegistrationCheck<P extends object>(
                     router.push('/login');
                 }
             }
+            console.log(`register in withAuthcheck is ${isRegistered}`)
 
             if (isRegistered && organizer?.email) {
                 return;

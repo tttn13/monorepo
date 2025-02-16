@@ -32,7 +32,7 @@ function ProfilePage() {
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
-        
+
         e.preventDefault()
 
         try {
@@ -57,6 +57,7 @@ function ProfilePage() {
             setOrganizer(response)
 
             setLoading(false)
+            console.log(`register after  is ${isRegistered}`)
 
         } catch (error) {
             console.log('Failed to update user from page')
@@ -106,6 +107,8 @@ function ProfilePage() {
     };
 
     useEffect(() => {
+        console.log(`register in profile is ${isRegistered}`)
+
         if (!isRegistered && modalRef.current) {
             modalRef.current.showModal();
         }
