@@ -8,11 +8,7 @@ import LoginBtn from './components/login-btn'
 const playwrite = Playwrite_IN()
 const sans = Josefin_Sans({ subsets: ['latin'] })
 export default function Home() {
-  const images = [
-    'http://100.118.120.108:80/zucal-public/localhost_3000_home%20(1).png',
-    'http://100.118.120.108:80/zucal-public/localhost_3000_home%20(2).png',
-    'http://100.118.120.108:80/zucal-public/localhost_3000_home.png'
-  ];
+ 
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex items-center justify-between p-6 bg-white border-b shadow-xl">

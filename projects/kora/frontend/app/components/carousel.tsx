@@ -5,11 +5,11 @@ const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const images = [
-        { src: "http://100.118.120.108:80/zucal-public/main_page.png", alt: "Main page" },
-        { src: "http://100.118.120.108:80/zucal-public/schedule_page.png", alt: "Schedule page" },
-        { src: "http://100.118.120.108:80/zucal-public/book_page.png", alt: "Book page" },
-        { src: "http://100.118.120.108:80/zucal-public/profile_page.png", alt: "Profile page" },
-        { src: "http://100.118.120.108:80/zucal-public/login_page.png", alt: "Login page" },
+        { src: "https://100.118.120.108:80/zucal-public/main_page.png", alt: "Main page" },
+        { src: "https://100.118.120.108:80/zucal-public/schedule_page.png", alt: "Schedule page" },
+        { src: "https://100.118.120.108:80/zucal-public/book_page.png", alt: "Book page" },
+        { src: "https://100.118.120.108:80/zucal-public/profile_page.png", alt: "Profile page" },
+        { src: "https://100.118.120.108:80/zucal-public/login_page.png", alt: "Login page" },
     ];
 
     useEffect(() => {

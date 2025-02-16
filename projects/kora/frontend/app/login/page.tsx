@@ -1,14 +1,11 @@
 'use client'
 
-import Loader from "../components/loader";
-import LoginBtn from "../components/login-btn";
 import Loginlogin from "../components/login-login";
-import Logo from "../components/logo";
 
 export default function Login() {
   const encoded = encodeURIComponent("/home");
   const url =
-    'http://100.118.120.108:80/zucal-photos/uploads/blob.svg'
+    'https://100.118.120.108:80/zucal-photos/uploads/blob.svg'
   return (
     <>
       <div className="flex">
