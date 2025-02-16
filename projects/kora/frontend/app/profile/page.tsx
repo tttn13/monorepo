@@ -46,7 +46,7 @@ function ProfilePage() {
                     photo: organizer.photo || ""
                 })
                 : await userService.update(organizer);
-            
+            console.log("updating user")
             updateRegistered(true)
             
             setOrganizer(response)
