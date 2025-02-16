@@ -118,11 +118,6 @@ function ProfilePage() {
     }, [isRegistered]);
 
     useEffect(() => {
-        // return () => {
-        //     if (previewUrl) {
-        //         URL.revokeObjectURL(previewUrl);
-        //     }
-        // };
         console.log(`previewUrl url is ${previewUrl}`)
     }, [previewUrl]);
     return (

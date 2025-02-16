@@ -1,7 +1,6 @@
 import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import { userService } from '../../services/api/userService';
 import type { User } from '../../types/shared-types';
+import { devtools, persist } from 'zustand/middleware'
 
 interface UserState {
     organizer: User;
@@ -15,6 +14,7 @@ interface UserState {
 
 export const useUserStore = create<UserState>()(
     devtools(
+        persist(
         (set, get) => ({
             organizer: {
                 id: -1,
@@ -59,6 +59,12 @@ export const useUserStore = create<UserState>()(
                 localStorage.removeItem('user-storage');
             },
         }),
-        { name: 'user-storage' }
-    )
+            {
+                name: 'user-storage',
+                partialize: (state) => ({
+                    organizer: state.organizer,
+                    isRegistered: state.isRegistered
+                })
+            }
+    ))
 );
