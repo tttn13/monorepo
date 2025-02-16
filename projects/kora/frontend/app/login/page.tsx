@@ -4,8 +4,10 @@ import Loginlogin from "../components/login-login";
 
 export default function Login() {
   const encoded = encodeURIComponent("/home");
-  const url =
-    'https://100.118.120.108:80/zucal-photos/uploads/blob.svg'
+  const url = process.env.NEXT_PUBLIC_STORAGE_PROVIDER == "minio" 
+    ? `${process.env.NEXT_PUBLIC_MINIO_URL}/zucal-public/blob.svg`
+    : `${process.env.NEXT_PUBLIC_AWS_URL}/blob.svg`
+  
   return (
     <>
       <div className="flex">

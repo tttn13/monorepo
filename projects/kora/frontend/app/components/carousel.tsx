@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 
 const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
-
+    const imageStorage = process.env.NEXT_PUBLIC_STORAGE_PROVIDER == "minio"
+        ? `${process.env.NEXT_PUBLIC_MINIO_URL}/zucal-public`
+        : `${process.env.NEXT_PUBLIC_AWS_URL}`
     const images = [
-        { src: "https://100.118.120.108:80/zucal-public/main_page.png", alt: "Main page" },
-        { src: "https://100.118.120.108:80/zucal-public/schedule_page.png", alt: "Schedule page" },
-        { src: "https://100.118.120.108:80/zucal-public/book_page.png", alt: "Book page" },
-        { src: "https://100.118.120.108:80/zucal-public/profile_page.png", alt: "Profile page" },
-        { src: "https://100.118.120.108:80/zucal-public/login_page.png", alt: "Login page" },
+        { src: `${imageStorage}/main_page.png`, alt: "Main page" },
+        { src: `${imageStorage}/schedule_page.png`, alt: "Schedule page" },
+        { src: `${imageStorage}/book_page.png`, alt: "Book page" },
+        { src: `${imageStorage}/profile_page.png`, alt: "Profile page" },
+        { src: `${imageStorage}/login_page.png`, alt: "Login page" },
     ];
 
     useEffect(() => {
