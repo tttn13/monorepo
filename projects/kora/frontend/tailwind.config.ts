@@ -21,4 +21,8 @@ export default {
   plugins: [
     daisyui,
   ],
+  daisyui: {
+    themes: ["light"], 
+  },
+  darkMode: false, 
 } satisfies Config;
