@@ -24,5 +24,4 @@ export default {
   daisyui: {
     themes: ["light"], 
   },
-  darkMode: false, 
 } satisfies Config;
