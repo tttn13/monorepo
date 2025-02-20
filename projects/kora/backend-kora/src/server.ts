@@ -1,7 +1,6 @@
 import Koa from 'koa'
 import Router from '@koa/router'
 import bodyParser from 'koa-body';
-// import bodyParser from 'koa-bodyparser'
 import cors from '@koa/cors'  
 import { userRouter } from './routes/user.routes'
 import { bookingRouter } from './routes/booking.routes'
@@ -20,16 +19,12 @@ async function testConnection() {
 }
 
 const app = new Koa()
-// app.use(cors({
-//   origin: '*',
-//   credentials: true,
-// }));
 
 // app.use(authDebug); 
 
-// app.use(bodyParser())
+console.log(`origin is ${process.env.FRONT_END}`)
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: process.env.FRONT_END, 
   credentials: true,
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization'],
@@ -45,7 +40,6 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 
-
 testConnection().then(() => {
   const port = process.env.PORT || 3004
   app.listen(port, () => {
@@ -54,4 +48,12 @@ testConnection().then(() => {
   checkMinIO()
   setBucketPublicPolicy();
   checkBucketPolicy();
+})
+
+checkMinIO().then(() => {
+  console.log('checking minio')
+})
+
+checkBucketPolicy().then(() => {
+  console.log('checking bucket policy')
 })

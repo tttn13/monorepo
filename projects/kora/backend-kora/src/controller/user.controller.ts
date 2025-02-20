@@ -2,6 +2,7 @@ import { Context } from 'koa'
 import { userService } from '../services/user.service'
 import { User, Booking } from '@prisma/client'
 import { minioClient } from '../lib/minio';
+import 'dotenv/config'
 
 export const userController = {
   async getPresignedUrl(ctx: Context) {
@@ -16,7 +17,7 @@ export const userController = {
 
       ctx.body = {
         url: presignedUrl,
-        publicUrl: `http://100.118.120.108:80/zucal-photos/${fileName}`,
+        publicUrl: `https://${process.env.AWS_ENDPOINT}/zucal-photos/${fileName}`,
         fileName: fileName
       };
 
@@ -43,7 +44,9 @@ export const userController = {
         email: string;
         photo: string
       }
+      console.log('creating user')
       const user = await userService.createUser(data)
+      console.log(`user id is ${user.id}`)
       ctx.body = user
     } catch (error) {
       ctx.status = 400

@@ -1,13 +1,20 @@
 import { Client } from 'minio';
+import 'dotenv/config'
 
+// export const minioClient = new Client({
+//   endPoint: process.env.MINIO_ENDPOINT || "",  // Replace with your MinIO server address
+//   port: Number(process.env.PORT) || 80,             // Default MinIO port
+//   useSSL: true,          // Set to true if using HTTPS
+//   accessKey: process.env.MINIO_ACCESS_KEY,     // Your MinIO access key
+//   secretKey: process.env.MINIO_SECRET_KEY // Your MinIO secret key
+// });
 export const minioClient = new Client({
-  endPoint: '100.118.120.108',  // Replace with your MinIO server address
-  port: 80,             // Default MinIO port
-  useSSL: false,          // Set to true if using HTTPS
-  accessKey: 'x7oY0CuvKggnCIrgi6zp',     // Your MinIO access key
-  secretKey: 'hshZJGy4DBRy0qxqQKwmzSytkxkUkKqKjuEOCJjk' // Your MinIO secret key
+  endPoint: process.env.AWS_ENDPOINT || "", 
+  region: 'us-east-1',
+  useSSL: true,         
+  accessKey: process.env.AWS_ACCESSKEY,     
+  secretKey: process.env.AWS_SECRETKEY 
 });
-
 export async function setBucketPublicPolicy() {
   const bucketName = 'zucal-photos';
   const policy = {
@@ -44,6 +51,7 @@ export async function checkBucketPolicy() {
 export async function checkMinIO() {
   try {
     const bucketName = 'zucal-photos';
+    console.log(`minio endpoint is ${process.env.MINIO_ENDPOINT}`)
     const exists = await minioClient.bucketExists(bucketName);
     exists ? console.log(`bucket exists`) : console.log(`bucket doest not exist`);
   } catch (error) {

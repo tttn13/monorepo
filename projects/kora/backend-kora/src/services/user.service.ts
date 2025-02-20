@@ -30,15 +30,10 @@ export const userService = {
     if (existed) {
       return existed;
     }
-    const { id, ...updateData } = data;
+    const { id, ...userData } = data;
     
     return prisma.user.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        photo: data.photo,
-        authId: data.authId
-      }
+      data: userData
     })
   },
 

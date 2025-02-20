@@ -1,0 +1,10 @@
+name: Keep Zucal backend Active
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Zucal Render App
+        run: curl -s "https://zucal-backend-v1-0.onrender.com/api/user/1"
