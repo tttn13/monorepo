@@ -22,3 +22,8 @@
 ### File storage 
 - S3-compatible storage service : Minio 
 - AWS s3 in production
+### Deployment
+- [Docker](https://www.docker.com/) : containerized and created separate image for front and back end
+- [Render](https://render.com/) : backend
+- [Vercel](https://vercel.com/) : front end
+- [Neon](https://neon.tech/) : Postgres db
