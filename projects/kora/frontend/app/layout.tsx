@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
       <html data-theme="light">
         <body className={os.className}>
-          {children}
+         {children}
         </body>
         </html>
   )
