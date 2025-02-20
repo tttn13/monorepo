@@ -25,4 +25,5 @@ export default {
     themes: ["light"], 
     darkTheme: "light",
   },
+  darkMode: 'class',
 } satisfies Config;
