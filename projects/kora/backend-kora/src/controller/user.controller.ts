@@ -1,6 +1,6 @@
 import { Context } from 'koa'
 import { userService } from '../services/user.service'
-import { User, Booking } from '@prisma/client'
+import { User } from '@prisma/client'
 import { minioClient } from '../lib/minio';
 import 'dotenv/config'
 
@@ -8,16 +8,23 @@ export const userController = {
   async getPresignedUrl(ctx: Context) {
     try {
       const fileName = `uploads/${crypto.randomUUID()}.jpg`;
+      var presignedUrl = "";
 
-      const presignedUrl = await minioClient.presignedPutObject(
-        'zucal-photos',
-        fileName,
-        24 * 60 * 60 // 24 hours expiry
-      );
+      try {
+        presignedUrl = await minioClient.presignedPutObject(
+          'zucal-photos',
+          fileName,
+          24 * 60 * 60
+        );
+      } catch (error) {
+        console.log(error)
+        ctx.body = { error: error };
+      }
 
       ctx.body = {
         url: presignedUrl,
-        publicUrl: `https://${process.env.AWS_ENDPOINT}/zucal-photos/${fileName}`,
+        publicUrl: `https://zucal-photos.${process.env.AWS_ENDPOINT}/${fileName}`,
+        // publicUrl: `https://${process.env.AWS_ENDPOINT}/zucal-photos/${fileName}`,
         fileName: fileName
       };
 
@@ -77,7 +84,7 @@ export const userController = {
   },
 
   async getUser(ctx: Context) {
-   
+
     const userId = Number(ctx.params.id);
     try {
       const users = await userService.getUser(userId)

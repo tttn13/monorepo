@@ -16,27 +16,27 @@ export const minioClient = new Client({
   secretKey: process.env.AWS_SECRETKEY 
 });
 export async function setBucketPublicPolicy() {
-  const bucketName = 'zucal-photos';
-  const policy = {
-    Version: '2012-10-17',
-    Statement: [  
-      {
-        Sid: 'PublicRead',
-        Effect: 'Allow',
-        Principal: '*',
-        Action: ['s3:GetObject'],
-        Resource: [`arn:aws:s3:::${bucketName}/*`]
-      }
-    ]
-  };
+  // const bucketName = 'zucal-photos';
+  // const policy = {
+  //   Version: '2012-10-17',
+  //   Statement: [  
+  //     {
+  //       Sid: 'PublicRead',
+  //       Effect: 'Allow',
+  //       Principal: '*',
+  //       Action: ['s3:GetObject'],
+  //       Resource: [`arn:aws:s3:::${bucketName}/*`]
+  //     }
+  //   ]
+  // };
 
-  try {
-    await minioClient.setBucketPolicy(bucketName, JSON.stringify(policy));
-    console.log('Bucket policy set to public read');
-  } catch (error) {
-    console.error('Error setting bucket policy:', error);
-    throw error;
-  }
+  // try {
+  //   await minioClient.setBucketPolicy(bucketName, JSON.stringify(policy));
+  //   console.log('Bucket policy set to public read');
+  // } catch (error) {
+  //   console.error('Error setting bucket policy:', error);
+  //   throw error;
+  // }
 }
 
 export async function checkBucketPolicy() {
@@ -51,7 +51,6 @@ export async function checkBucketPolicy() {
 export async function checkMinIO() {
   try {
     const bucketName = 'zucal-photos';
-    console.log(`minio endpoint is ${process.env.MINIO_ENDPOINT}`)
     const exists = await minioClient.bucketExists(bucketName);
     exists ? console.log(`bucket exists`) : console.log(`bucket doest not exist`);
   } catch (error) {

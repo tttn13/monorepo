@@ -18,16 +18,6 @@ function ProfilePage() {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
-            console.log(e.target.files[0].name)
-
-            console.log(e.target.files[0].size)
-
-            // const MAX_FILE_SIZE = 1.5 * 1024 * 1024; // 2MB in bytes
-
-            // if (!file ) {
-            //     console.log("no file");
-            //     return
-            // };
 
             const objectUrl = URL.createObjectURL(e.target.files[0]);
 
@@ -82,14 +72,9 @@ function ProfilePage() {
     }
 
     const handleUpload = async () => {
-        if (!file) {
-            alert('Please select a file first!');
-            return;
-        }
-
+        if (!file) return;
         const formData = new FormData();
         formData.append('file', file);
-
         setUploading(true);
 
         try {
