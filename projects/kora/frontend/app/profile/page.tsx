@@ -3,14 +3,12 @@
 import { useUserStore } from '../store/userStore'
 import MenuDrawer from '../components/menu-drawer'
 import Topbar from '../components/topbar';
-import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { userService } from '../../services/api/userService';
 import { withRegistrationCheck } from '../components/withRegistrationCheck';
 
 function ProfilePage() {
     const { organizer, setOrganizer, isRegistered, updateRegistered } = useUserStore();
-    const searchParams = useSearchParams();
     const modalRef = useRef<HTMLDialogElement | null>(null);
     const [file, setFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);
@@ -21,9 +19,12 @@ function ProfilePage() {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
 
-            const MAX_FILE_SIZE = 1.5 * 1024 * 1024; // 2MB in bytes
+            // const MAX_FILE_SIZE = 1.5 * 1024 * 1024; // 2MB in bytes
 
-            if (!file || file.size >= MAX_FILE_SIZE) return;
+            if (!file ) {
+                console.log("no file");
+                return
+            };
 
             const objectUrl = URL.createObjectURL(file);
 
@@ -51,7 +52,7 @@ function ProfilePage() {
                     photo: organizer.photo || ""
                 })
                 : await userService.update(organizer);
-            
+
             updateRegistered(true)
 
             setOrganizer(response)
@@ -138,19 +139,31 @@ function ProfilePage() {
                         <div className="max-w-7xl w-1/2 mx-auto py-6 sm:px-6 lg:px-8">
                             <div className="flex flex-col">
                                 <div className="avatar m-4 bg-black opacity-100 hover:opacity-50 w-24 rounded-full">
-                                    <div className="w-24 rounded-full relative" style={{
-                                        backgroundImage: `url(${previewUrl
-                                            || organizer.photo
-                                            || "https://images.pexels.com/photos/1870376/pexels-photo-1870376.jpeg"})`,
-                                        backgroundSize: 'cover'
-                                    }}>
-                                        <input type="file" accept="image/*" onChange={handleFileChange} className='cursor-pointer opacity-0 w-24 rounded-full h-full' />
-                                        <div className=" absolute z-10 flex items-center justify-center opacity-0 hover:opacity-100" style={{ top: '40px', right: '40px' }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
-                                                <path fillRule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5ZM3 15.75a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </div>
+                                    {previewUrl !== "" ? (
+                                        <div className="w-24 rounded-full relative" style={{
+                                            backgroundImage: `url(${previewUrl}`,
+                                            backgroundSize: 'cover'
+                                        }}>
+                                            <input type="file" accept="image/*" onChange={handleFileChange} className='cursor-pointer opacity-0 w-24 rounded-full h-full' />
+                                            <div className=" absolute z-10 flex items-center justify-center opacity-0 hover:opacity-100" style={{ top: '40px', right: '40px' }}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                                    <path fillRule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5ZM3 15.75a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>) :
+
+                                        <div className="w-24 rounded-full relative" style={{
+                                            backgroundImage: `url(${organizer.photo
+                                                || "https://images.pexels.com/photos/1870376/pexels-photo-1870376.jpeg"})`,
+                                            backgroundSize: 'cover'
+                                        }}>
+                                            <input type="file" accept="image/*" onChange={handleFileChange} className='cursor-pointer opacity-0 w-24 rounded-full h-full' />
+                                            <div className=" absolute z-10 flex items-center justify-center opacity-0 hover:opacity-100" style={{ top: '40px', right: '40px' }}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                                                    <path fillRule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l4.5 4.5a.75.75 0 0 1-1.06 1.06l-3.22-3.22V16.5a.75.75 0 0 1-1.5 0V4.81L8.03 8.03a.75.75 0 0 1-1.06-1.06l4.5-4.5ZM3 15.75a.75.75 0 0 1 .75.75v2.25a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V16.5a.75.75 0 0 1 1.5 0v2.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V16.5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </div>}
                                 </div>
 
                                 <label className="input input-bordered flex items-center gap-2 m-4">

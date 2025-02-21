@@ -3,7 +3,7 @@
 ![System Context](https://zucal-public.s3.us-east-1.amazonaws.com/SystemContext+(1).jpg)
 
 ### Container diagram
-![Container](https://zucal-public.s3.us-east-1.amazonaws.com/Container.jpg)
+![Container](https://zucal-public.s3.us-east-1.amazonaws.com/Container.drawio.png)
 
 ## Tech
 ### Front end
