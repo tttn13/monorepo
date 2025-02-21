@@ -1,16 +1,9 @@
-version: '3'
+version: '3.8'
 
 services:
-  zucalbackend:
-    image: kora-backend
-    container_name: zucalbackend
-    ports:
-      - "3001:3001"
-    env_file:
-      - ./.env
-    networks:
-      - zucal
-
-networks:
-  zucal:
-    external: true
+  kora-backend:
+    build:
+      context: .
+      target: runner
+      no-cache: true
+    image: tttn13/zucal-backend:v1.0
