@@ -6,7 +6,7 @@ import { userRouter } from './routes/user.routes'
 import { bookingRouter } from './routes/booking.routes'
 import { prisma } from './lib/prigma'
 import 'dotenv/config'
-import { checkBucketPolicy, checkMinIO, setBucketPublicPolicy } from './lib/minio';
+import { checkMinIO, setBucketPublicPolicy } from './lib/minio';
 
 async function testConnection() {
   try {
@@ -47,13 +47,10 @@ testConnection().then(() => {
   })
   checkMinIO()
   setBucketPublicPolicy();
-  checkBucketPolicy();
+  // checkBucketPolicy();
 })
 
 checkMinIO().then(() => {
   console.log('checking minio')
 })
 
-checkBucketPolicy().then(() => {
-  console.log('checking bucket policy')
-})

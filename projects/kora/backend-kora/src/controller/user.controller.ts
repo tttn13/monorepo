@@ -8,34 +8,26 @@ export const userController = {
   async getPresignedUrl(ctx: Context) {
     try {
       const fileName = `uploads/${crypto.randomUUID()}.jpg`;
-      var presignedUrl = "";
-
-      try {
-        presignedUrl = await minioClient.presignedPutObject(
-          'zucal-photos',
-          fileName,
-          24 * 60 * 60
-        );
-      } catch (error) {
-        console.log(error)
-        ctx.body = { error: error };
-      }
-
+  
+      const presignedUrl = await minioClient.presignedPutObject(
+        "zucal-photos",
+        fileName,
+        24 * 60 * 60
+      );
+  
       ctx.body = {
         url: presignedUrl,
         publicUrl: `https://zucal-photos.${process.env.AWS_ENDPOINT}/${fileName}`,
-        // publicUrl: `https://${process.env.AWS_ENDPOINT}/zucal-photos/${fileName}`,
-        fileName: fileName
+        fileName,
       };
-
     } catch (error) {
+      console.error("Error generating presigned URL:", error);
+  
       ctx.status = 500;
-      ctx.body = { error: 'Failed to generate presigned URL' };
+      ctx.body = {
+        error: error instanceof Error ? error.message : "Internal Server Error",
+      };
     }
-  },
-
-  getMinioUrl(fileName: string) {
-    return `http://100.118.120.108:80/zucal-photos/${fileName}`;
   },
 
   async complete(ctx: Context) {
@@ -51,9 +43,7 @@ export const userController = {
         email: string;
         photo: string
       }
-      console.log('creating user')
       const user = await userService.createUser(data)
-      console.log(`user id is ${user.id}`)
       ctx.body = user
     } catch (error) {
       ctx.status = 400

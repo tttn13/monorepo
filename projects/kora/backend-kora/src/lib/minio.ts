@@ -39,14 +39,14 @@ export async function setBucketPublicPolicy() {
   // }
 }
 
-export async function checkBucketPolicy() {
-  try {
-    const policy = await minioClient.getBucketPolicy('zucal-photos');
-    console.log('Current bucket policy:', policy);
-  } catch (error) {
-    console.error('Error checking bucket policy:', error);
-  }
-}
+// export async function checkBucketPolicy() {
+//   try {
+//     const policy = await minioClient.getBucketPolicy('zucal-photos');
+//     console.log('Current bucket policy:', policy);
+//   } catch (error) {
+//     console.error('Error checking bucket policy:', error);
+//   }
+// }
 
 export async function checkMinIO() {
   try {
