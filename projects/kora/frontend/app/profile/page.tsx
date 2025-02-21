@@ -51,7 +51,6 @@ function ProfilePage() {
             setOrganizer(response)
 
             setLoading(false)
-            console.log(`register after  is ${isRegistered}`)
 
         } catch (error) {
             console.log('Failed to update user from page')
@@ -96,7 +95,6 @@ function ProfilePage() {
     };
 
     useEffect(() => {
-        console.log(`register in profile is ${isRegistered}`)
 
         if (!isRegistered && modalRef.current) {
             modalRef.current.showModal();
@@ -107,7 +105,6 @@ function ProfilePage() {
     }, [isRegistered]);
 
     useEffect(() => {
-        console.log(`previewUrl url is ${previewUrl}`)
     }, [previewUrl]);
     return (
         <>
