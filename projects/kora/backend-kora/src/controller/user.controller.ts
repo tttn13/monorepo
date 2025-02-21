@@ -2,6 +2,8 @@ import { Context } from 'koa'
 import { userService } from '../services/user.service'
 import { User } from '@prisma/client'
 import { minioClient } from '../lib/minio';
+import crypto from 'crypto';
+
 import 'dotenv/config'
 
 export const userController = {
