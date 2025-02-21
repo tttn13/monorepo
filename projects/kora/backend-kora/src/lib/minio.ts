@@ -19,7 +19,7 @@ export async function setBucketPublicPolicy() {
   const bucketName = 'zucal-photos';
   const policy = {
     Version: '2012-10-17',
-    Statement: [
+    Statement: [  
       {
         Sid: 'PublicRead',
         Effect: 'Allow',
