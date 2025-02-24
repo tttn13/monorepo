@@ -13,19 +13,19 @@ const sans = Josefin_Sans({ subsets: ['latin'] })
 export default function Home() {
     const [input, setInput] = useState("");
   
- const handleAddEvent = async () => {
-     if (input.trim() === "") return;
-     console.log(input);
-     const parsedEvent = await bookingService.parse(input);
-     console.log(`parsedEvent is ${parsedEvent.title}, ${parsedEvent.guest}`)
-     setInput("");
-   };
+//  const handleAddEvent = async () => {
+//      if (input.trim() === "") return;
+//      console.log(input);
+//      const parsedEvent = await bookingService.parse(input);
+//      console.log(`parsedEvent is ${parsedEvent.title}, ${parsedEvent.guest}`)
+//      setInput("");
+//    };
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex items-center justify-between p-6 bg-white border-b shadow-xl">
         <h2 className={`${sans.className} text-2xl font-bold`}>ZUCAL</h2>
         <nav>
-        <input
+        {/* <input
             type="text"
             placeholder="Enter event details"
             value={input}
@@ -33,7 +33,7 @@ export default function Home() {
           />
           <button onClick={handleAddEvent} className="w-full">
             Add Event
-          </button>
+          </button> */}
           <ul className="flex space-x-4">
             {/* <li><Link href="#" className="text-gray-600 hover:text-blue-600">About us</Link></li>
             <li><Link href="#" className="text-gray-600 hover:text-blue-600">Features</Link></li> */}
