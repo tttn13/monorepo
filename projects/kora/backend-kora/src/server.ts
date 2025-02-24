@@ -5,7 +5,6 @@ import cors from '@koa/cors'
 import { userRouter } from './routes/user.routes'
 import { bookingRouter } from './routes/booking.routes'
 import { prisma } from './lib/prigma'
-import 'dotenv/config'
 import { checkMinIO, setBucketPublicPolicy } from './lib/minio';
 
 async function testConnection() {
@@ -19,10 +18,6 @@ async function testConnection() {
 }
 
 const app = new Koa()
-
-// app.use(authDebug); 
-
-console.log(`origin is ${process.env.FRONT_END}`)
 app.use(cors({
   origin: process.env.FRONT_END, 
   credentials: true,
@@ -44,10 +39,10 @@ testConnection().then(() => {
   const port = process.env.PORT || 3004
   app.listen(port, () => {
     console.log(`Server running on port ${port}`)
+    console.log(process.env.FRONT_END)
   })
   checkMinIO()
   setBucketPublicPolicy();
-  // checkBucketPolicy();
 })
 
 checkMinIO().then(() => {

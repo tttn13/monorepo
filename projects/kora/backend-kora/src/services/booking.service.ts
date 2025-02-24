@@ -27,16 +27,6 @@ export const bookingService = {
         })
     },
 
-    // async updateBooking(data: {
-    //     id: string,
-    //     userId: number,
-    //     guestName: string | null,
-    //     guestEmail: string,
-    //     guestNotes: string,
-    //     startTime: Date,
-    //     endTime: Date;
-    //     timeZone: string
-    // }) {
     async updateBooking(data: Booking) {
         const { id, ...updateData } = data;
 

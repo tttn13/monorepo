@@ -24,7 +24,7 @@ export default function BookingPageWrapper() {
     const verifyBooking = async (token: string) => {
 
       resetStore();
-      console.log('verifyBooking')
+      
       const response = await bookingService.verify(token);
 
       if (!response) {

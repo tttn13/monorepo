@@ -1,9 +1,8 @@
 version: '3.8'
 
 services:
-  kora-backend:
+  kora-frontend:
     build:
       context: .
       target: runner
-      no-cache: true
-    image: tttn13/zucal-backend:v1.0
+    image: tttn13/zucal-frontend:v1.0

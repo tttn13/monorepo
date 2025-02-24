@@ -3,8 +3,36 @@ import { bookingService } from '../services/booking.service'
 import { userService } from '../services/user.service';
 import { emailService } from '../services/email.service';
 import type { Booking } from '.././lib/types';
+import axios from 'axios';
+
+const aiApi = axios.create({
+  baseURL: process.env.AI_API_URL,
+  headers: {
+      'Content-Type': 'application/json',
+  }
+})
 
 export const bookingController = {
+  async parseInput(ctx: Context) {
+    try {
+      const data = ctx.request.body as { input?: string };
+      console.log(`input is ${data.input}`)
+      const userInput = data.input;
+      const response = await aiApi.post('/parse-event', { input: userInput });
+
+      ctx.status = response.status;
+      ctx.body = response.data;
+
+    } catch (error) {
+      ctx.status = 401;
+      ctx.body = {
+        error: error instanceof Error
+          ? error.message
+          : 'Unable to parse'
+      };
+    }
+  },
+
   async verify(ctx: Context) {
     try {
       const token = ctx.query.token as string;
@@ -17,8 +45,8 @@ export const bookingController = {
       const bookingData = emailService.verifyBookingToken(token) as Booking;
 
       const booking = await bookingService.getBooking(bookingData.id);
-      if (!booking) {
 
+      if (!booking) {
         ctx.status = 404;
         ctx.body = { error: 'Booking not found' };
         return;

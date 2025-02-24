@@ -11,12 +11,28 @@ const otherApi = axios.create({
 
 export const bookingService = {
     verify: async (token: string): Promise<Booking> => {
-        console.log(`verifying, api url is ${process.env.NEXT_PUBLIC_API_URL}`)
         const response = await otherApi.get<Booking>(`/booking/auth?token=${token}`);
-        // const response = await publicApi.get<Booking>(`/booking/verify?token=${token}`);
         return response.data
     },
-    get: async (id: string): Promise<Booking> => { 
+    parse: async (input: string): Promise<ParsedEvent | null> => {
+        
+        const aiApi = axios.create({
+            baseURL: "http://127.0.0.1:3004/api",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+
+        try {
+            const response = await aiApi.get<ParsedEvent>(`/booking/ai?input=${encodeURIComponent(input)}`);
+            return response.data;
+
+        } catch (error) {
+            console.error;
+            return null;
+        }
+    },
+    get: async (id: string): Promise<Booking> => {
         const response = await api.get<Booking>(`/booking/${id}`);
         return response.data
     },
@@ -36,4 +52,10 @@ export const bookingService = {
         const response = await api.delete<Booking>(`/booking/${id}}`);
         return response.data
     },
+}
+
+interface ParsedEvent {
+    title: string;
+    date: Date;
+    guest: string;
 }

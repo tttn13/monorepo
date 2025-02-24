@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  kora-backend:
+    build:
+      context: .
+      target: runner
+    image: tttn13/zucal-backend:v1.0do
