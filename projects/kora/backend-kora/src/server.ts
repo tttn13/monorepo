@@ -24,6 +24,7 @@ app.use(cors({
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization'],
 }));
+
 app.use(bodyParser({ multipart: true }));
 
 const router = new Router()
@@ -39,7 +40,6 @@ testConnection().then(() => {
   const port = process.env.PORT || 3004
   app.listen(port, () => {
     console.log(`Server running on port ${port}`)
-    console.log(process.env.FRONT_END)
   })
   checkMinIO()
   setBucketPublicPolicy();

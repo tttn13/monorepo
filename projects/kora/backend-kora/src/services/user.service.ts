@@ -1,8 +1,6 @@
 import { prisma } from '../lib/prigma'
-import formidable from 'formidable';
-import { Context } from 'koa'
 
-export const userService = {
+export const userDbService= {
 
   async verifyUser(authKey: string) {
     return await prisma.user.findFirst({
@@ -13,12 +11,14 @@ export const userService = {
   },
   
   async getUser(id: number) {
-    return prisma.user.findUnique({
+    const user = prisma.user.findUnique({
       where: { id },
       include: {
         bookings: true
       }
     })
+    
+    return user;
   },
 
   async getUsers() {

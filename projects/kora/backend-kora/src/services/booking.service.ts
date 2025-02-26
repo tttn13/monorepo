@@ -1,7 +1,7 @@
 import { prisma } from '../lib/prigma'
 import type { Booking } from '.././lib/types';
 
-export const bookingService = {
+export const bookingDbService = {
     async getBooking(bookingid: string) {
         return prisma.booking.findUnique({
             where: { id: bookingid },

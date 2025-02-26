@@ -1,9 +1,8 @@
 import { Context } from 'koa'
-import { userService } from '../services/user.service'
-import { User } from '@prisma/client'
+import { userDbService } from '../services/user.service'
 import { minioClient } from '../lib/minio';
 import crypto from 'crypto';
-
+import type { User } from '../lib/types';
 import 'dotenv/config'
 
 export const userController = {
@@ -45,7 +44,7 @@ export const userController = {
         email: string;
         photo: string
       }
-      const user = await userService.createUser(data)
+      const user = await user.db.service.createUser(data)
       ctx.body = user
     } catch (error) {
       ctx.status = 400
@@ -56,7 +55,7 @@ export const userController = {
   async updateUser(ctx: Context) {
     try {
       const data = ctx.request.body as User
-      const user = await userService.updateUser(data)
+      const user = await user.db.service.updateUser(data)
       ctx.body = user
     } catch (error) {
       ctx.status = 400
@@ -67,7 +66,7 @@ export const userController = {
   async verifyUser(ctx: Context) {
     const authId = (ctx.params.id);
     try {
-      const users = await userService.verifyUser(authId)
+      const users = await userDbService.db.service.verifyUser(authId)
       ctx.body = users
     } catch (error) {
       ctx.status = 500
@@ -79,7 +78,7 @@ export const userController = {
 
     const userId = Number(ctx.params.id);
     try {
-      const users = await userService.getUser(userId)
+      const users = await userDbService.db.service.getUser(userId)
       ctx.body = users
     } catch (error) {
       ctx.status = 404
@@ -89,7 +88,7 @@ export const userController = {
 
   async getUsers(ctx: Context) {
     try {
-      const users = await userService.getUsers()
+      const users = await userDbService.db.service.getUsers()
       ctx.body = users
     } catch (error) {
       ctx.status = 500

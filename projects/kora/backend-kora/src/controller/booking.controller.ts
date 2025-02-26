@@ -1,6 +1,6 @@
 import { Context } from 'koa'
-import { bookingService } from '../services/booking.service'
-import { userService } from '../services/user.service';
+import { bookingDbService } from '../services/booking.service'
+import { userDbService} from '../services/user.service';
 import { emailService } from '../services/email.service';
 import type { Booking } from '.././lib/types';
 import axios from 'axios';
@@ -15,14 +15,10 @@ const aiApi = axios.create({
 export const bookingController = {
   async parseInput(ctx: Context) {
     try {
-      const data = ctx.request.body as { input?: string };
-      console.log(`input is ${data.input}`)
-      const userInput = data.input;
-      const response = await aiApi.post('/parse-event', { input: userInput });
-
+      const { input, organizer } = ctx.request.body as { input?: string; organizer?: number };
+      const response = await aiApi.post('/parse-input', { input: input, organizer: organizer });    
       ctx.status = response.status;
       ctx.body = response.data;
-
     } catch (error) {
       ctx.status = 401;
       ctx.body = {
@@ -32,7 +28,7 @@ export const bookingController = {
       };
     }
   },
-
+ 
   async verify(ctx: Context) {
     try {
       const token = ctx.query.token as string;
@@ -44,7 +40,7 @@ export const bookingController = {
 
       const bookingData = emailService.verifyBookingToken(token) as Booking;
 
-      const booking = await bookingService.getBooking(bookingData.id);
+      const booking = await bookingDbService.getBooking(bookingData.id);
 
       if (!booking) {
         ctx.status = 404;
@@ -66,7 +62,7 @@ export const bookingController = {
   async create(ctx: Context) {
     try {
       const data = ctx.request.body as Booking
-      const organizer = await userService.getUser(data.userId);
+      const organizer = await userDbService.getUser(data.userId);
 
       if (!organizer) {
         throw new Error('Organizer not found');
@@ -74,10 +70,10 @@ export const bookingController = {
 
       const bookingData = {
         ...data,
-        userId: organizer.id
+        userId: organizer.id,
       };
 
-      const booking = await bookingService.createBooking(bookingData)
+      const booking = await bookingDbService.createBooking(bookingData)
 
       const bookLink = emailService.createBookingLink(booking);
 
@@ -99,9 +95,9 @@ export const bookingController = {
   async update(ctx: Context) {
     try {
       const data = ctx.request.body as Booking
-      const booking = await bookingService.updateBooking(data)
+      const booking = await bookingDbService.updateBooking(data)
       const bookLink = emailService.createBookingLink(booking);
-      const organizer = await userService.getUser(booking.userId);
+      const organizer = await userDbService.db.service.getUser(booking.userId);
 
       if (!organizer) {
         throw new Error('Organizer not found');
@@ -123,7 +119,7 @@ export const bookingController = {
   async get(ctx: Context) {
     try {
       const id = String(ctx.params.id);
-      const booking = await bookingService.getBooking(id)
+      const booking = await bookingDbService.getBooking(id)
       ctx.body = booking
     } catch (error) {
       ctx.status = 500
@@ -134,7 +130,7 @@ export const bookingController = {
   async getAll(ctx: Context) {
     try {
       const userId = Number(ctx.params.userId);
-      const bookings = await bookingService.getBookings(userId)
+      const bookings = await bookingDbService.getBookings(userId)
       ctx.body = bookings
     } catch (error) {
       ctx.status = 500
@@ -145,11 +141,17 @@ export const bookingController = {
   async delete(ctx: Context) {
     try {
       const id = String(ctx.params.id);
-      const booking = await bookingService.deleteBooking(id)
+      const booking = await bookingDbService.deleteBooking(id)
       ctx.body = booking
     } catch (error) {
       ctx.status = 500
       ctx.body = { error: 'Failed to get bookings' }
     }
   }
+}
+
+async function confirmEventCreate(data: Booking) {
+  console.log('confirm event creation')
+  const response = await aiApi.post('/confirm', data);
+  console.log(`response in confirmEventCreate is ${response.status}`)
 }
