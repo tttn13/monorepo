@@ -23,3 +23,17 @@ export const publicApi = axios.create({
         'Content-Type': 'application/json',
     },
 });
+
+export const otherApi = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})
+
+export const llmServer = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_LLM_API,
+    headers: {
+        'Content-Type': 'application/json',
+    }
+})

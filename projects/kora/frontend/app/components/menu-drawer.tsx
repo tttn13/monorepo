@@ -68,6 +68,7 @@ export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
                     <li className={`m-2 p-2 ${isActive('/auth/logout')}`}>
                         <button onClick={async () => {
                             resetBookState();
+                            resetStore();
                             redirect('/auth/logout');
                         }}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">

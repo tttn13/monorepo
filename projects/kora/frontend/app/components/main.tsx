@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import type { Booking } from '../../types/shared-types';
-import { bookingService } from '../../services/api/bookingService';
+import { bookingApiService } from '../../services/api/bookingService';
 import { useNextCalendarApp, ScheduleXCalendar } from '@schedule-x/react'
 import {
     createViewDay,
@@ -29,7 +29,7 @@ function MainContent() {
     }, [eventsService]);
 
     const getEvents = async (userId: number) => {
-        const bookings = await bookingService.getAll(userId);
+        const bookings = await bookingApiService.getAll(userId);
         const calendarEvents = bookings.map((booking: Booking) => ({
             id: booking.id,
             title: `Booking with ${booking.guestEmail}`,

@@ -5,7 +5,7 @@ const Carousel = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const imageStorage = process.env.NEXT_PUBLIC_STORAGE_PROVIDER == "minio"
         ? `${process.env.NEXT_PUBLIC_MINIO_URL}/zucal-public`
-        : `${process.env.NEXT_PUBLIC_AWS_URL}`
+        : `${process.env.NEXT_PUBLIC_CDN_URL}`
     const images = [
         { src: `${imageStorage}/main_page.png`, alt: "Main page" },
         { src: `${imageStorage}/schedule_page.png`, alt: "Schedule page" },

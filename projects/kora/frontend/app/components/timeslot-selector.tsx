@@ -14,7 +14,6 @@ export default function TimeSlotSelector() {
     const [custom, setCustom] = useState(false);
     const [customValue, setCustomValue] = useState("");
     const timeSlot = useBookingStore((state) => state.timeSlot);
-
     const setTimeSlot = useBookingStore((state) => state.setTimeSlot);
     
     function handleSlotSelected(timeSlot: string) {

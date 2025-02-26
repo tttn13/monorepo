@@ -4,7 +4,7 @@ import { useUserStore } from '../store/userStore'
 import MenuDrawer from '../components/menu-drawer'
 import Topbar from '../components/topbar';
 import React, { useEffect, useRef, useState } from 'react';
-import { userService } from '../../services/api/userService';
+import { userApiService } from '../../services/api/userService';
 import { withRegistrationCheck } from '../components/withRegistrationCheck';
 
 function ProfilePage() {
@@ -18,9 +18,7 @@ function ProfilePage() {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0]);
-
             const objectUrl = URL.createObjectURL(e.target.files[0]);
-
             setPreviewUrl(objectUrl);
         }
     };
@@ -37,14 +35,14 @@ function ProfilePage() {
             }
 
             const response = !isRegistered
-                ? await userService.create({
+                ? await userApiService.create({
                     id: -2,
                     authId: organizer.authId,
                     name: organizer.name,
                     email: organizer.email || "",
                     photo: organizer.photo || ""
                 })
-                : await userService.update(organizer);
+                : await userApiService.update(organizer);
 
             updateRegistered(true)
 
@@ -58,7 +56,7 @@ function ProfilePage() {
     };
 
     async function getUser() {
-        const person = await userService.get(organizer.id)
+        const person = await userApiService.get(organizer.id)
 
         if (!person) return;
 
@@ -77,13 +75,13 @@ function ProfilePage() {
         setUploading(true);
 
         try {
-            const { url, publicUrl } = await userService.getPresignedUrl();
+            const { url, publicUrl } = await userApiService.getPresignedUrl();
 
-            await userService.upload(file, url);
+            await userApiService.upload(file, url);
 
             organizer.photo = publicUrl
 
-            await userService.update(organizer);
+            await userApiService.update(organizer);
 
             setOrganizer(organizer)
         } catch (error) {

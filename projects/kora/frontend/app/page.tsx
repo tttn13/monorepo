@@ -4,36 +4,16 @@ import { Josefin_Sans, Playwrite_IN } from 'next/font/google'
 import Carousel from './components/carousel'
 import Logo from './components/logo'
 import LoginBtn from './components/login-btn'
-import { useEffect, useState } from 'react';
-import { parseNaturalLanguageEvent } from '../services/utils/languageParser'
-import { bookingService } from '../services/api/bookingService'
 
 const playwrite = Playwrite_IN()
 const sans = Josefin_Sans({ subsets: ['latin'] })
 export default function Home() {
-    const [input, setInput] = useState("");
-  
-//  const handleAddEvent = async () => {
-//      if (input.trim() === "") return;
-//      console.log(input);
-//      const parsedEvent = await bookingService.parse(input);
-//      console.log(`parsedEvent is ${parsedEvent.title}, ${parsedEvent.guest}`)
-//      setInput("");
-//    };
+   
   return (
     <div className="flex flex-col min-h-screen">
       <header className="flex items-center justify-between p-6 bg-white border-b shadow-xl">
         <h2 className={`${sans.className} text-2xl font-bold`}>ZUCAL</h2>
         <nav>
-        {/* <input
-            type="text"
-            placeholder="Enter event details"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button onClick={handleAddEvent} className="w-full">
-            Add Event
-          </button> */}
           <ul className="flex space-x-4">
             {/* <li><Link href="#" className="text-gray-600 hover:text-blue-600">About us</Link></li>
             <li><Link href="#" className="text-gray-600 hover:text-blue-600">Features</Link></li> */}

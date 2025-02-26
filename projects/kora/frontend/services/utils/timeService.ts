@@ -1,4 +1,4 @@
-import { differenceInMinutes, endOfDay, isSameMinute, addDays, startOfDay, format, add, parse, set, isAfter, formatDuration } from 'date-fns';
+import { differenceInMinutes, parseISO, endOfDay, isSameMinute, addDays, startOfDay, format, add, parse, set, isAfter, formatDuration } from 'date-fns';
 
 export const timeService = {
     convertToUtcDate: (localDate: Date): string => {
@@ -9,7 +9,17 @@ export const timeService = {
     },
 
     getTimeOnly: (eventDate: Date): string => {
-        return format(eventDate, 'h:mm a')
+        const date = new Date(eventDate)
+        return format(date, 'h:mm a');
+    },
+
+    getLocalTimezoneName: () => {
+        const timeZoneAbbr = new Date().toLocaleString('en-US', { timeZoneName: 'short' }).split(' ').pop();
+        return timeZoneAbbr;
+    },
+
+    getTodayDate: () => {
+        return format(new Date(), 'yyyy-MM-dd');
     },
 
     convertMinsToHrsAndMins(minutesString: number): string {
@@ -64,7 +74,7 @@ export const timeService = {
         return isSameMinute(eventDate, startOfDay(eventDate));
     },
 
-    daysFromNow(days : number): Date {
+    daysFromNow(days: number): Date {
         const now = new Date();
         return endOfDay(addDays(now, days))
     },

@@ -2,7 +2,7 @@ import { api,publicApi } from './axios'
 import type { User } from '../../types/shared-types';
 import axios from 'axios';
 
-export const userService = {
+export const userApiService = {
     verify: async (authId: string): Promise<User> => {
         const response = await publicApi.get<User>(`/user/auth/${authId}`);
         return response.data

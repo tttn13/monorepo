@@ -3,21 +3,20 @@
 import React, { useState, FormEvent, useEffect } from 'react'
 import { useBookingStore } from '../store/bookingStore'
 import { useRouter } from 'next/navigation'
-import { bookingService } from '../../services/api/bookingService';
+import { bookingApiService } from '../../services/api/bookingService';
 import { timeService } from '../../services/utils/timeService'
 import { useUserStore } from '../store/userStore'
 
 export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
+
   const { organizer } = useUserStore();
   const bookDetails = useBookingStore((state) => state.formData);
   const timeSlot = useBookingStore((state) => state.timeSlot);
   const duration = useBookingStore((state) => state.duration);
   const updateFormData = useBookingStore((state) => state.updateFormData);
-  const resetStore = useBookingStore((state) => state.resetStore);
   const [submitting, setSubmitting] = useState<boolean>(false);
-
   const router = useRouter();
- 
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name == "name") {
@@ -29,36 +28,32 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
     }
   }
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
+   
     setSubmitting(true)
 
     bookDetails.startTime = timeService.createStartTime(bookDetails.startTime, timeSlot);
 
     bookDetails.endTime = timeService.calculateEndTime(bookDetails.startTime, duration);
-    
-    if (organizer) {
-      bookDetails.userId = organizer.id
-    }
-    
-    var createdBook = isOrganizer ? await bookingService.create(bookDetails) : await bookingService.update(bookDetails);
-    
+
+    bookDetails.userId = (organizer) ? organizer.id : bookDetails.userId
+
+    var createdBook = isOrganizer
+      ? await bookingApiService.create(bookDetails)
+      : await bookingApiService.update(bookDetails);
+
+    await bookingApiService.createGoogleCalendarEvent(createdBook);
+
     updateFormData(createdBook)
-    
+
     setSubmitting(false)
     
     router.push('/confirmation');
   }
 
-  useEffect(() => {
-    if (isOrganizer) {
-      resetStore()
-    }
-  }, []);
-
   return (
-    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow">
+    <form onSubmit={handleFormSubmit} className="p-6 bg-white rounded-lg shadow">
       <h2 className="text-2xl font-bold mb-4">Enter {isOrganizer ? "Guest" : "Your"} Details</h2>
       <div className="space-y-4">
         <div>
@@ -95,7 +90,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
         {submitting
           ? <button type="submit" disabled className="btn btn-primary min-w-full">Submitting</button>
           : <button type="submit" className="btn btn-primary min-w-full">{isOrganizer ? "Schedule" : "Update"} Event</button>
-      }
+        }
       </div>
     </form>
   )

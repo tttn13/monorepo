@@ -1,9 +1,9 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation';
-import { bookingService } from '../../services/api/bookingService'
+import { bookingApiService } from '../../services/api/bookingService'
 import { timeService } from '../../services/utils/timeService'
-import { userService } from '../../services/api/userService';
+import { userApiService } from '../../services/api/userService';
 import CalendarView from '../components/calendar'
 import BookingForm from '../components/booking-form'
 import TimeSlotSelector from '../components/timeslot-selector'
@@ -19,20 +19,21 @@ export default function BookingPageWrapper() {
   const setDuration = useBookingStore((state) => state.setDuration);
   const resetStore = useBookingStore((state) => state.resetStore);
   const setTimeSlot = useBookingStore((state) => state.setTimeSlot);
+ 
 
   useEffect(() => {
     const verifyBooking = async (token: string) => {
 
       resetStore();
       
-      const response = await bookingService.verify(token);
+      const response = await bookingApiService.verify(token);
 
       if (!response) {
         console.error('Verification failed: No response received');
         return;
       }
 
-      const organizer = await userService.get(response.userId);
+      const organizer = await userApiService.get(response.userId);
       if (!response) {
         console.error(' No organizer received');
         return;
@@ -94,7 +95,9 @@ export default function BookingPageWrapper() {
                   <h2 className="card-title py-6">Your Host - {hostName}</h2>
                 </div>
               </div>
-              <BookingForm isOrganizer={false} />
+              <BookingForm 
+              isOrganizer={false} 
+              />
             </div>
 
             <div>

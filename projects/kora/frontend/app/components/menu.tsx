@@ -57,6 +57,7 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
             </li>
             <li className={`m-2 p-2 ${isActive('/auth/logout')}`}>
                 <button onClick={async () => {
+                    resetStore();
                     resetBookState();
                     redirect('/auth/logout');
                 }}>

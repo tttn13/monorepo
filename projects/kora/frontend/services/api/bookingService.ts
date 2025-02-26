@@ -1,32 +1,41 @@
-import { api } from './axios'
+import { api, otherApi, llmServer } from './axios'
 import type { Booking } from '../../types/shared-types';
 import axios from 'axios';
 
-const otherApi = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    }
-})
+// const otherApi = axios.create({
+//     baseURL: process.env.NEXT_PUBLIC_API_URL,
+//     headers: {
+//         'Content-Type': 'application/json',
+//     }
+// })
 
-export const bookingService = {
+// const llmServer = axios.create({
+//     baseURL: process.env.NEXT_PUBLIC_LLM_API,
+//     headers: {
+//         'Content-Type': 'application/json',
+//     }
+// })
+
+export const bookingApiService = {
+
     verify: async (token: string): Promise<Booking> => {
         const response = await otherApi.get<Booking>(`/booking/auth?token=${token}`);
         return response.data
     },
-    parse: async (input: string): Promise<ParsedEvent | null> => {
-        
-        const aiApi = axios.create({
-            baseURL: "http://127.0.0.1:3004/api",
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-
+    parse: async (input: string, organizer: number): Promise<Booking | null> => {
         try {
-            const response = await aiApi.get<ParsedEvent>(`/booking/ai?input=${encodeURIComponent(input)}`);
+            const response = await otherApi.post(`/booking/input`, { input, organizer });
             return response.data;
 
+        } catch (error) {
+            console.error;
+            return null;
+        }
+    },
+    createGoogleCalendarEvent: async (event: Booking): Promise<Booking | null> => {
+        try {
+            const response = await llmServer.post(`/confirm`, { event });
+            return response.data;
         } catch (error) {
             console.error;
             return null;
@@ -52,10 +61,4 @@ export const bookingService = {
         const response = await api.delete<Booking>(`/booking/${id}}`);
         return response.data
     },
-}
-
-interface ParsedEvent {
-    title: string;
-    date: Date;
-    guest: string;
 }

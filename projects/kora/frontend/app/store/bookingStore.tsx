@@ -12,7 +12,7 @@ interface BookingState {
   timeSlot: string;
   setTimeSlot: (time: string) => void;
   setDuration: (length: number ) => void;  
-  updateFormData: (data: Partial<Booking>) => void
+  updateFormData: (data: Booking) => void
   resetStore: () => void;
 }
 
@@ -20,8 +20,7 @@ export const useBookingStore = create<BookingState>()(
   devtools(
     persist(
       (set, get) => ({
-        duration: -1,
-        timeSlot: "",
+        
         formData: {
           id: '',
           userId: -1,
@@ -32,39 +31,38 @@ export const useBookingStore = create<BookingState>()(
           guestNotes: '',
           timeZone: null
         },
+
+        duration: -1,
+        timeSlot: "",
         isLoading: false,
 
         // Actions
-        updateFormData: (data) =>
-          set(
-            (state) => ({
-              formData: { ...state.formData, ...data },
-            }),
-            false,
-            'updateFormData'
-          ),
-        
-        setDuration: (length) => set(
-          (state) => ({
-            duration: length,
-          }),
-          false,
-          'setDuration'
-        ),
+        updateFormData: (data) => {
+          set({ 
+            formData: {
+              id: data.id,
+              userId: data.userId,
+              guestName: data.guestName,
+              guestEmail: data.guestEmail,
+              startTime: data.startTime,
+              endTime: data.endTime,
+              guestNotes: data.guestNotes ,
+              timeZone: data.timeZone || "UTC"
+            }
+          })
+        },
+          
+        setDuration: (length) => {
+          set({ duration : length })
+        },
 
-        setTimeSlot: (time) => set( 
-          (state) => ({
-            timeSlot: time,  
-          }),
-          false,
-          'setTimeSlot'
-        ),
+        setTimeSlot: (time) => {
+          set({ timeSlot : time })
+        },
 
         resetStore: () => {
-          // Reset the in-memory state
           set({
-            duration: -1,
-            timeSlot: "",
+            
             formData: {
               id: '',
               userId: -1,
@@ -75,6 +73,9 @@ export const useBookingStore = create<BookingState>()(
               guestNotes: '',
               timeZone: null
             },
+            
+            duration: -1,
+            timeSlot: "",
             isLoading: false
           });
           

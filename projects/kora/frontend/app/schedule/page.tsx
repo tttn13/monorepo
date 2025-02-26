@@ -7,9 +7,20 @@ import { useUserStore } from '../store/userStore'
 import MenuDrawer from '../components/menu-drawer'
 import Topbar from '../components/topbar'
 import { withRegistrationCheck } from '../components/withRegistrationCheck';
+import { useSearchParams } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
 
 function SchedulePage() {
     const { organizer } = useUserStore();
+    const searchParams = useSearchParams();
+    const isAiGenerated = searchParams.get('aigenerated');
+    
+    useEffect(() => {
+        if (isAiGenerated === 'true') {
+            window.alert("Our LLM is not perfect, please check and confirm details");
+        }
+
+    }, []);
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -28,7 +39,9 @@ function SchedulePage() {
                                     <h2 className="card-title py-6">{organizer?.name} - Host</h2>
                                 </div>
                             </div>
-                            <BookingForm isOrganizer={true} />
+                            <BookingForm
+                                isOrganizer={true}
+                            />
                         </div>
 
                         <div className=''>

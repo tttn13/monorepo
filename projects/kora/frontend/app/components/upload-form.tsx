@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { userService } from '../../services/api/userService';
+import { userApiService } from '../../services/api/userService';
 
 export default function UploadPhoto() {
   const [file, setFile] = useState<File | null>(null);
@@ -25,8 +25,8 @@ export default function UploadPhoto() {
     setUploading(true);
 
     try {
-      const { url, publicUrl } = await userService.getPresignedUrl();
-      await userService.upload(file, url);
+      const { url, publicUrl } = await userApiService.getPresignedUrl();
+      await userApiService.upload(file, url);
       setPhotoUrl(publicUrl);
 console.log(`publicUrl is ${publicUrl}`)
     } catch (error) {
