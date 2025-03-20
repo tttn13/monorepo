@@ -1,9 +1,9 @@
 ## Software Architecture
-### System Context diagram
-![System Context](https://zucal-public.s3.us-east-1.amazonaws.com/SystemContext+(1).jpg)
 
 ### Container diagram
-![Container](https://zucal-public.s3.us-east-1.amazonaws.com/Container.drawio.png)
+
+![Container](https://zucal-public.s3.us-east-1.amazonaws.com/Container.png)
+
 
 ## Tech
 ### Front end
