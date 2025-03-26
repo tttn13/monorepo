@@ -21,11 +21,12 @@ function MainContent() {
     const { organizer} = useUserStore();
     const [isMounted, setIsMounted] = useState(false);
     const [upcomingEvents, setUpcomingEvents] = useState<CalendarEventExternal[]>([])
-    
+    const [today, setToday] = useState("")
+
     var calendar = useNextCalendarApp({
         views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
         defaultView: 'month-grid',
-        selectedDate: '2025-02-10'
+        selectedDate: format(new Date(), 'yyyy-MM-dd')
     }, [eventsService]);
 
     const getEvents = async (userId: number) => {
@@ -51,6 +52,7 @@ function MainContent() {
     }
 
     useEffect(() => {
+        today = 
         setIsMounted(true);
         if (organizer.id != -1) {
             getEvents(organizer.id);
