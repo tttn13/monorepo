@@ -7,7 +7,7 @@ bookingRouter.post('/', jwtCheck, bookingController.create)
 bookingRouter.put('/:id', bookingController.update)
 bookingRouter.get('/verify', bookingController.verify);
 bookingRouter.get('/auth', bookingController.verify);
-bookingRouter.post('/input', bookingController.parseInput);
+bookingRouter.post('/input', jwtCheck, bookingController.parseInput);
 
 bookingRouter.get('/:id', jwtCheck, bookingController.get)
 bookingRouter.get('/user/:userId',jwtCheck, bookingController.getAll)

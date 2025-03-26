@@ -16,6 +16,7 @@ export const bookingController = {
   async parseInput(ctx: Context) {
     try {
       const { input, organizer } = ctx.request.body as { input?: string; organizer?: number };
+      console.log(input)
       const response = await aiApi.post('/parse-input', { input: input, organizer: organizer });    
       ctx.status = response.status;
       ctx.body = response.data;
@@ -97,7 +98,7 @@ export const bookingController = {
       const data = ctx.request.body as Booking
       const booking = await bookingDbService.updateBooking(data)
       const bookLink = emailService.createBookingLink(booking);
-      const organizer = await userDbService.db.service.getUser(booking.userId);
+      const organizer = await userDbService.getUser(booking.userId);
 
       if (!organizer) {
         throw new Error('Organizer not found');
@@ -150,8 +151,3 @@ export const bookingController = {
   }
 }
 
-async function confirmEventCreate(data: Booking) {
-  console.log('confirm event creation')
-  const response = await aiApi.post('/confirm', data);
-  console.log(`response in confirmEventCreate is ${response.status}`)
-}

@@ -52,7 +52,6 @@ function MainContent() {
     }
 
     useEffect(() => {
-        today = 
         setIsMounted(true);
         if (organizer.id != -1) {
             getEvents(organizer.id);

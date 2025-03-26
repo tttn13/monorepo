@@ -83,7 +83,7 @@ function HomePage() {
 
     return (
         <div className="bg-gray-100">
-            <Topbar pageName='zucal' toggleIsVisible={false} avatar={organizer.photo} />
+            <Topbar pageName='</> zucal' toggleIsVisible={false} avatar={organizer.photo} />
             <main>
                 <div className='mt-4 flex justify-center items-center flex-col'>
                     <div className="tooltip ml-7 " data-tip="Enter your event creation request">

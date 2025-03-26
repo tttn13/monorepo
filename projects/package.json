@@ -22,8 +22,5 @@
     "packages/shared-types",
     "kora/frontend",
     "kora/backend-kora"
-  ],
-  "dependencies": {
-    "openai": "^4.85.3"
-  }
+  ]
 }

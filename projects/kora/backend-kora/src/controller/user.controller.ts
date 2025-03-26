@@ -44,7 +44,7 @@ export const userController = {
         email: string;
         photo: string
       }
-      const user = await user.db.service.createUser(data)
+      const user = await userDbService.createUser(data)
       ctx.body = user
     } catch (error) {
       ctx.status = 400
@@ -55,7 +55,7 @@ export const userController = {
   async updateUser(ctx: Context) {
     try {
       const data = ctx.request.body as User
-      const user = await user.db.service.updateUser(data)
+      const user = await userDbService.updateUser(data)
       ctx.body = user
     } catch (error) {
       ctx.status = 400
@@ -66,7 +66,7 @@ export const userController = {
   async verifyUser(ctx: Context) {
     const authId = (ctx.params.id);
     try {
-      const users = await userDbService.db.service.verifyUser(authId)
+      const users = await userDbService.verifyUser(authId)
       ctx.body = users
     } catch (error) {
       ctx.status = 500
@@ -78,7 +78,7 @@ export const userController = {
 
     const userId = Number(ctx.params.id);
     try {
-      const users = await userDbService.db.service.getUser(userId)
+      const users = await userDbService.getUser(userId)
       ctx.body = users
     } catch (error) {
       ctx.status = 404
@@ -88,7 +88,7 @@ export const userController = {
 
   async getUsers(ctx: Context) {
     try {
-      const users = await userDbService.db.service.getUsers()
+      const users = await userDbService.getUsers()
       ctx.body = users
     } catch (error) {
       ctx.status = 500
