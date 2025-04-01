@@ -1,7 +1,8 @@
-import axios from 'axios';
-import { userDbService } from './user.service';
 import dotenv from 'dotenv';
 dotenv.config();
+import axios from 'axios';
+import { userDbService } from './user.service';
+
 export const auth0Service = {
     async getGoogleTokenFromAuth0(id: number) {
         try {
