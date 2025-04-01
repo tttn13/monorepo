@@ -6,6 +6,8 @@ import { userRouter } from './routes/user.routes'
 import { bookingRouter } from './routes/booking.routes'
 import { prisma } from './lib/prigma'
 import { checkMinIO, setBucketPublicPolicy } from './lib/minio';
+import dotenv from 'dotenv';
+dotenv.config();
 
 async function testConnection() {
   try {

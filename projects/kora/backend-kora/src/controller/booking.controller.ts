@@ -2,6 +2,8 @@ import { Context } from 'koa'
 import { bookingDbService } from '../services/booking.service'
 import { userDbService} from '../services/user.service';
 import { emailService } from '../services/email.service';
+import { auth0Service } from '../services/auth0.service';
+
 import type { Booking } from '.././lib/types';
 import axios from 'axios';
 
@@ -16,7 +18,6 @@ export const bookingController = {
   async parseInput(ctx: Context) {
     try {
       const { input, organizer } = ctx.request.body as { input?: string; organizer?: number };
-      console.log(input)
       const response = await aiApi.post('/parse-input', { input: input, organizer: organizer });    
       ctx.status = response.status;
       ctx.body = response.data;
@@ -125,6 +126,18 @@ export const bookingController = {
     } catch (error) {
       ctx.status = 500
       ctx.body = { error: 'Failed to get bookings' }
+    }
+  },
+
+  async getGoogleToken(ctx: Context) {
+    try {
+      const id = Number(ctx.params.id);
+      console.log(`id in getGoogleToken is ${id}`)
+      const token = await auth0Service.getGoogleTokenFromAuth0(id)
+      ctx.body = token
+    } catch (error) {
+      ctx.status = 500
+      ctx.body = { error: 'Failed to get Google Token' }
     }
   },
 
