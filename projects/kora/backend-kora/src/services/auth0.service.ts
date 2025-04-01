@@ -4,13 +4,15 @@ import { userDbService } from './user.service';
 export const auth0Service = {
     async getGoogleTokenFromAuth0(id: number) {
         try {
-            const authId = await userDbService.getUser(id);
+            const user = await userDbService.getUser(id);
+            console.log(`authId is ${user?.authId}`)
+
             const managementApiToken = await this.getManagementApiToken();
             console.log(`managementApiToken is ${managementApiToken}`)
 
             // Then use Management API to get user's identity with Google access token
             const response = await axios.get(
-                `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${authId}`,
+                `https://${process.env.AUTH0_DOMAIN}/api/v2/users/${user?.authId}`,
                 {
                     headers: {
                         Authorization: `Bearer ${managementApiToken}`
