@@ -49,7 +49,7 @@ export default function BookingForm({ isOrganizer }: { isOrganizer: boolean }) {
 
     setSubmitting(false)
     
-    router.push('/confirmation');
+    // router.push('/confirmation');
   }
 
   return (

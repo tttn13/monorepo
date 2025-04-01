@@ -21,6 +21,7 @@ export const bookingApiService = {
         try {
             const response = await api.get(`/booking/google_access_token/${event.userId}`);
             // const response = await llmServer.post(`/confirm`, { event, token });
+            console.log(`response for ggle is ${response.data}`)
             return response.data;
         } catch (error) {
             console.error;
