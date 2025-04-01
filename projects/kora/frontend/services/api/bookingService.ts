@@ -19,8 +19,8 @@ export const bookingApiService = {
     },
     createGoogleCalendarEvent: async (event: Booking): Promise<Booking | null> => {
         try {
-            const response = await api.get(`/booking/google_access_token/${event.userId}`);
-            // const response = await llmServer.post(`/confirm`, { event, token });
+            const response = await api.get(`/booking/google_token/${event.userId}`);
+            // const response = await llmServer.post(`/confirm`, { event });
             console.log(`response for ggle is ${response.data}`)
             return response.data;
         } catch (error) {
