@@ -1,30 +1,15 @@
-import { api, otherApi, llmServer } from './axios'
+import { api, publicApi, llmServer } from './axios'
 import type { Booking } from '../../types/shared-types';
-import axios from 'axios';
-
-// const otherApi = axios.create({
-//     baseURL: process.env.NEXT_PUBLIC_API_URL,
-//     headers: {
-//         'Content-Type': 'application/json',
-//     }
-// })
-
-// const llmServer = axios.create({
-//     baseURL: process.env.NEXT_PUBLIC_LLM_API,
-//     headers: {
-//         'Content-Type': 'application/json',
-//     }
-// })
 
 export const bookingApiService = {
 
     verify: async (token: string): Promise<Booking> => {
-        const response = await otherApi.get<Booking>(`/booking/auth?token=${token}`);
+        const response = await publicApi.get<Booking>(`/booking/auth?token=${token}`);
         return response.data
     },
     parse: async (input: string, organizer: number): Promise<Booking | null> => {
         try {
-            const response = await otherApi.post(`/booking/input`, { input, organizer });
+            const response = await publicApi.post(`/booking/input`, { input, organizer });
             return response.data;
 
         } catch (error) {
@@ -34,7 +19,8 @@ export const bookingApiService = {
     },
     createGoogleCalendarEvent: async (event: Booking): Promise<Booking | null> => {
         try {
-            const response = await llmServer.post(`/confirm`, { event });
+            const response = await api.get(`/booking/google_access_token/${event.userId}`);
+            // const response = await llmServer.post(`/confirm`, { event, token });
             return response.data;
         } catch (error) {
             console.error;
@@ -50,7 +36,7 @@ export const bookingApiService = {
         return response.data
     },
     update: async (event: Booking): Promise<Booking> => {
-        const response = await otherApi.put<Booking>(`/booking/}`, event);
+        const response = await publicApi.put<Booking>(`/booking/}`, event);
         return response.data
     },
     create: async (event: Omit<Booking, 'id'>): Promise<Booking> => {

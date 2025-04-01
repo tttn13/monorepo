@@ -21,7 +21,7 @@ export default function ConfirmationForm({ eventDate, duration, email,name, orga
                 <p>Organizer: {organizer?.name}</p>
                 <p>Guest Email: {email}</p>
                 <p>Guest Name: {name}</p>
-                <p>Google Calendar created </p>
+                {/* <p>Google Calendar created </p> */}
             </div>
         </div>
     )
