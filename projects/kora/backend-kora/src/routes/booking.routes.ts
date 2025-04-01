@@ -7,7 +7,7 @@ bookingRouter.post('/', jwtCheck, bookingController.create)
 bookingRouter.put('/:id', bookingController.update)
 bookingRouter.get('/verify', bookingController.verify);
 bookingRouter.get('/auth', bookingController.verify);
-bookingRouter.get('/google_access_token/:userId', bookingController.getGoogleToken);
+bookingRouter.get('/google_token/:userId', bookingController.getGoogleToken);
 
 bookingRouter.post('/input', jwtCheck, bookingController.parseInput);
 

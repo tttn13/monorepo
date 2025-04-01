@@ -132,7 +132,6 @@ export const bookingController = {
   async getGoogleToken(ctx: Context) {
     try {
       const id = Number(ctx.params.userId);
-      console.log(`id in getGoogleToken is ${id}`)
       const token = await auth0Service.getGoogleTokenFromAuth0(id)
       ctx.body = token
     } catch (error) {
