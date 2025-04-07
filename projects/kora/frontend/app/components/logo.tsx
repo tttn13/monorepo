@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Logo = ({ text }: { text: string }) => {
+const SignupButton = ({ text }: { text: string }) => {
   return (
     <StyledWrapper>
       <button>
@@ -84,4 +84,4 @@ const StyledWrapper = styled.div`
   }`;
 
 
-export default Logo;
+export default SignupButton;

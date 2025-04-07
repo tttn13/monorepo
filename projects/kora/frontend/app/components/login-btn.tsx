@@ -8,7 +8,7 @@ const LoginBtn = () => {
         <span className="circle" aria-hidden="true">
           <span className="icon arrow" />
         </span>
-        <span className="button-text">Sign up now</span>
+        <span className="button-text">Get Started</span>
       </button>
     </StyledWrapper>
   );
