@@ -83,7 +83,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute top-1/4 left-1/4 w-12 h-12 bg-slate-700/20 dark:bg-slate-700/30 rounded-full"
+          className="absolute top-1/4 left-1/4 w-12 h-12 bg-blue-700/20 dark:bg-blue-700/30 rounded-full"
           animate={{
             y: [0, -20, 0],
             x: [0, 20, 0],
@@ -95,7 +95,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-8 h-8 bg-slate-700/20 dark:bg-slate-700/30 rounded-full"
+          className="absolute bottom-1/4 right-1/4 w-8 h-8 bg-blue-700/20 dark:bg-blue-700/30 rounded-full"
           animate={{
             y: [0, 30, 0],
             x: [0, -30, 0],
