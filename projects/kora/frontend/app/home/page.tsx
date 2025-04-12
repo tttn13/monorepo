@@ -99,7 +99,7 @@ function HomePage() {
                             <input
                                 className="input input-bordered input-secondary w-full max-w-xs m-4"
                                 type="text"
-                                placeholder="Meeting with Khloe on 2025-05-05 at 2pm for 45 minutes"
+                                placeholder="Meeting with Jane on 2025-05-05 at 2pm for 45 minutes"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                             />

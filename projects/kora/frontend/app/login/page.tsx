@@ -1,7 +1,7 @@
 'use client'
 
-import Loginlogin from "../components/login-login";
-import { AnimatedText } from "../animated-hero";
+import LoginBtnOnLoginPage from "../components/login-btn-on-login";
+import Hero from "../components/hero";
 
 export default function Login() {
   const encoded = encodeURIComponent("/home");
@@ -12,15 +12,11 @@ export default function Login() {
   return (
     <>
       <div className="flex">
-        <div className="place-items-center h-dvh flex flex-col justify-center px-8 w-3/5 background-cus"
-          style={{ backgroundImage: `url(${url})`, backgroundSize: 'cover' }}>
-          <AnimatedText text="Welcome to Zucal"/>
-        </div>
-
+        <Hero/>
         <div className="flex-auto h-dvh bg-gray-800 flex flex-col justify-center" >
           <div className="flex justify-center ">
             <a href={`/auth/login?returnTo=${encoded}`}>
-              <Loginlogin text="Sign in to your account"/>
+            <LoginBtnOnLoginPage text="Sign in to your account"/>
             </a>      
           </div>
 
@@ -28,7 +24,7 @@ export default function Login() {
             <div className="mt-10 text-center text-sm/6 text-white  text-opacity-50">
               No account ?
               <a href={`/auth/login?returnTo=${encoded}`} className="font-semibold text-indigo-600 hover:text-indigo-500">
-              <Loginlogin text="Sign up"/>
+              <LoginBtnOnLoginPage text="Sign up"/>
               </a>
             </div>
           </div>

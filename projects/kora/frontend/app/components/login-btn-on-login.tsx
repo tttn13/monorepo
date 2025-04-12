@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Loginlogin = ({ text }: { text: string }) => {
+const LoginBtnOnLoginPage = ({ text }: { text: string }) => {
   return (
     <StyledWrapper>
           <button>
@@ -52,4 +52,4 @@ const StyledWrapper = styled.div`
     transition-property: width, left;
   }`;
 
-export default Loginlogin 
+export default LoginBtnOnLoginPage
