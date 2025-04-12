@@ -9,7 +9,7 @@ export const bookingApiService = {
     },
     parse: async (input: string, organizer: number): Promise<Booking | null> => {
         try {
-            const response = await publicApi.post(`/booking/input`, { input, organizer });
+            const response = await publicApi.post(`/booking/parse-input`, { input, organizer });
             return response.data;
 
         } catch (error) {
