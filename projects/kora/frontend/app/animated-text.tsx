@@ -4,6 +4,10 @@ import Link from 'next/link'
 import LoginBtn from './components/login-btn'
 import { Josefin_Sans } from 'next/font/google'
 import { InfiniteSlider } from "./components/infinite-display";
+import DemoCalendar from "./components/demo/dummy-booking-form";
+import DemoTimeSelector from "./components/demo/dummy-time-selector";
+import DemoEventSelector from "./components/demo/dummy-event-length";
+import DemoDetails from "./components/demo/dummy-details";
 
 const sans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -63,29 +67,29 @@ function Hero() {
             <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               Create your schedule once, and you're ready to go.
             </p>
+          
           </div>
           <div className="flex flex-col gap-[50px] items-center">
             <Link href="/login"><LoginBtn /></Link>
             <InfiniteSlider durationOnHover={75} gap={24}>
+              <DemoCalendar />
+              <DemoTimeSelector />
+              <DemoEventSelector />
+              <DemoDetails />
               <img
                 src="https://d31qvhc0y1xlj9.cloudfront.net/schedule_page.png"
                 alt="Schedule Page"
-                className="aspect-square w-[120px] rounded-[4px]"
+                className="aspect-square w-[280px] h-[200px] rounded-[4px]"
               />
               <img
                 src="https://d31qvhc0y1xlj9.cloudfront.net/book_page.png"
                 alt="Book Page"
-                className="aspect-square w-[120px] rounded-[4px]"
+                className="aspect-square w-[280px] h-[200px] rounded-[4px]"
               />
               <img
                 src="https://d31qvhc0y1xlj9.cloudfront.net/main_page.png"
                 alt="Main Page"
-                className="aspect-square w-[120px] rounded-[4px]"
-              />
-              <img
-                src="https://d31qvhc0y1xlj9.cloudfront.net/profile_page.png"
-                alt="Profile Page"
-                className="aspect-square w-[120px] rounded-[4px]"
+                className="aspect-square w-[280px] h-[200px] rounded-[4px]"
               />
             </InfiniteSlider>
           </div>

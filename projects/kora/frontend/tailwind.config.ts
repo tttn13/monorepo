@@ -14,6 +14,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontSize: {
+        '10px': '10px',
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

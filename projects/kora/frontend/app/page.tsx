@@ -10,16 +10,8 @@ export default function Home() {
   return (
 
     <div className="flex flex-col min-h-screen ">
-      <AuroraBackground>
-
-        {/* <div className="absolute top-0 right-0">
-              <Link href="/login">
-                <SignupButton text='Sign Up' />
-              </Link>
-            </div>  */}
-            
+      <AuroraBackground>            
           <Hero />
-         
         <footer className={`bg-gray-800 text-white py-6 px-6 w-full absolute bottom-0 flex flex-col items-center justify-center ${lex.className}`}>
           <div className='flex'>
             <h4 className="text-lg font-semibold mr-1">Made with</h4>
