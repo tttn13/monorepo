@@ -1,5 +1,6 @@
 import { Josefin_Sans, Lexend } from 'next/font/google'
 const lex = Lexend({ subsets: ['latin'] })
+const sans = Josefin_Sans({ subsets: ['latin'] })
 
 export default function Topbar({ pageName, toggleIsVisible, avatar }: { pageName: string, toggleIsVisible: boolean, avatar: string }) {
     
@@ -19,7 +20,7 @@ export default function Topbar({ pageName, toggleIsVisible, avatar }: { pageName
                             </svg>
                         </label>
                         : <></>}
-                    <h1 className={`${lex.className} text-3xl font-bold px-3`}>{pageName}</h1>
+                    <h1 className={`${sans.className} text-3xl font-bold px-3`}>{pageName}</h1>
                 </div> 
                 <div className="avatar">
                     <div className="w-[60px] rounded-full">

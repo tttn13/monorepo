@@ -1,9 +1,10 @@
 'use client'
-import { Josefin_Sans } from 'next/font/google'
+import { Josefin_Sans,Lexend } from 'next/font/google'
 import { AuroraBackground } from "./aurora-background";
 import { Hero } from './animated-text'
 
-const sans = Josefin_Sans({ subsets: ['latin'] })
+const lex = Lexend({ subsets: ['latin'] })
+
 export default function Home() {
 
   return (
@@ -19,7 +20,7 @@ export default function Home() {
             
           <Hero />
          
-        <footer className={`bg-gray-800 text-white py-6 px-6 w-full absolute bottom-0 flex flex-col items-center justify-center ${sans.className}`}>
+        <footer className={`bg-gray-800 text-white py-6 px-6 w-full absolute bottom-0 flex flex-col items-center justify-center ${lex.className}`}>
           <div className='flex'>
             <h4 className="text-lg font-semibold mr-1">Made with</h4>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6 mr-1">
