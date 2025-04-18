@@ -2,7 +2,7 @@ export default function DemoDetails() {
 
     return (
         <>
-            <form className="p-6 bg-white shadow aspect-square w-[300px] h-[200px] rounded-[4px] text-10px">
+            <form className="p-6 bg-white shadow aspect-square w-[300px] h-[200px] rounded-[20px]  text-10px">
                 <h4 className="font-bold mb-4">Enter Guest Details</h4>
                 <div className="space-y-4">
                     <div>
