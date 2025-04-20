@@ -10,7 +10,7 @@ export const jwtCheck = jwt({
     jwksUri: `https://dev-dtmwhke5ke751f6m.us.auth0.com/.well-known/jwks.json`
   }),
   audience: ["htttps://kora-zucal.com","https://dev-dtmwhke5ke751f6m.us.auth0.com/userinfo"],
-  issuer: `https://dev-dtmwhke5ke751f6m.us.auth0.com/`,
+  issuer: `https://auth.calendar.zulon.org/`,
   algorithms: ['RS256']
 });
 

@@ -1,11 +1,13 @@
-post https://zucal-backend-v1-0.onrender.com/api/user/2
+get https://zucal-backend-v1-0.onrender.com/api/booking/user/2
 content-type: application/json
+authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlpyZXBaRGJqSFNKVzF6R21xRXpWaiJ9.eyJlbWFpbCI6Imhsb3ZldC4xMzEwQGdtYWlsLmNvbSIsInJlZ2lzdGVyZWQiOnRydWUsIm9yZ2FuaXplcklkIjoyLCJvcmdhbml6ZXJOYW1lIjoiQW5oIFRoaSBOZ3V5ZW4iLCJvcmdhbml6ZXJFbWFpbCI6Imhsb3ZldC4xMzEwQGdtYWlsLmNvbSIsIm9yZ2FuaXplclBob3RvIjoiIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLmNhbGVuZGFyLnp1bG9uLm9yZy8iLCJzdWIiOiJvYXV0aDJ8Z29vZ2xlLW9hdXRoMi1jdXN0b218Z29vZ2xlfDExNzMzNDAxODQ0NTQ0OTI0MTgyNiIsImF1ZCI6WyJodHR0cHM6Ly9rb3JhLXp1Y2FsLmNvbSIsImh0dHBzOi8vZGV2LWR0bXdoa2U1a2U3NTFmNm0udXMuYXV0aDAuY29tL3VzZXJpbmZvIl0sImlhdCI6MTc0NTExODU0NCwiZXhwIjoxNzQ1MjA0OTQ0LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiYXpwIjoiVWxteUFIRG9Cbjd5aVB0NkxpQTNKYUU2UEtoN0dLbG0ifQ.OCkatoRmFxa_v8OXNnZQ69Ylv3t-ZeLejKSPPk2RSU4DzEQYdNKMOgSNvE7kdq1aVevMCrHLE4dVauhm21mZIgsqWGLuC9hnIt0oacEuZzE9FTfPQHN4VmXULHrA5P_Rl2TfjkG2f6WD6F4aIIHau2hCRHBlShmnsl_zXk4rQDMV1BpOsnLjF05M3SptfdpbVp_6fn4TaEWRnpyMz3aAZl2TgH4_7gjuyIhkJohViSaYj-H-8aR_nN4E6ZSAwgj4ZW6Qro8UdyAC8T0rU6KHnKHvlV1PiPme99UnTpqGJsnDrj4oK0EqhzFdfsv7VZDB_KNpAG2b5iuzh03NA0Uuhg
+
 ###
 POST https://convert-input-api-latest.onrender.com/api/parse-input
 Content-Type: application/json
 
 {
-    "input": "Call with Lisa next monday at 9am,today is 2025-04-12, timezone is GMT+7",
+    "input": "Call with Lisa next monday at 9am,today is 2025-04-20, timezone is GMT+7",
     "organizer": 2
 }
 ###
@@ -13,6 +15,6 @@ POST https://zucal-backend-v1-0.onrender.com/api/booking/parse-input
 Content-Type: application/json
 
 {
-    "input": "Call with Lisa next monday at 9am,today is 2025-04-12, timezone is GMT+7",
+    "input": "Call with Lisa next monday at 9am,today is 2025-04-20, timezone is GMT+7",
     "organizer": 2
 }
