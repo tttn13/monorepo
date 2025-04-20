@@ -1,7 +1,15 @@
-GET http://localhost:3004/api/user/2
+post https://zucal-backend-v1-0.onrender.com/api/user/2
 content-type: application/json
 ###
-POST http://localhost:3004/api/booking/parse-input
+POST https://convert-input-api-latest.onrender.com/api/parse-input
+Content-Type: application/json
+
+{
+    "input": "Call with Lisa next monday at 9am,today is 2025-04-12, timezone is GMT+7",
+    "organizer": 2
+}
+###
+POST https://zucal-backend-v1-0.onrender.com/api/booking/parse-input
 Content-Type: application/json
 
 {

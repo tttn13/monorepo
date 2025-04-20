@@ -34,7 +34,7 @@ function Hero() {
       <div className="container mx-auto">
         <h2 className={`${sans.className} text-2xl font-bold text-center pt-8 mt-8`}>ZUCAL</h2>
 
-        <div className="flex gap-8 py-20 lg:pb-40 items-center justify-center flex-col">
+        <div className="flex gap-8 py-20 items-center justify-center flex-col">
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">
               <span className="text-spektr-cyan-50">We make scheduling</span>
@@ -79,17 +79,17 @@ function Hero() {
               <img
                 src="https://d31qvhc0y1xlj9.cloudfront.net/schedule_page.png"
                 alt="Schedule Page"
-                className="aspect-square w-[280px] h-[200px] rounded-[4px]"
+                className="aspect-square w-[280px] h-[200px] rounded-[10px]"
               />
               <img
                 src="https://d31qvhc0y1xlj9.cloudfront.net/book_page.png"
                 alt="Book Page"
-                className="aspect-square w-[280px] h-[200px] rounded-[4px]"
+                className="aspect-square w-[280px] h-[200px] rounded-[10px]"
               />
               <img
                 src="https://d31qvhc0y1xlj9.cloudfront.net/main_page.png"
                 alt="Main Page"
-                className="aspect-square w-[280px] h-[200px] rounded-[4px]"
+                className="aspect-square w-[280px] h-[200px] rounded-[10px]"
               />
             </InfiniteSlider>
           </div>
