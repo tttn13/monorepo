@@ -84,7 +84,7 @@ function HomePage() {
     return (
         <div className="bg-gray-100">
             <Topbar pageName='</> zucal' toggleIsVisible={false} avatar={organizer.photo} />
-            <main>
+            <main className='p-4 md:p-0'>
                 <div className='mt-4 flex justify-center items-center flex-col'>
                     <div className="tooltip ml-7 " data-tip="Enter your event creation request">
                         <button className="btn btn-ghost" onClick={() => setPromptInput(!promptInput)}>
