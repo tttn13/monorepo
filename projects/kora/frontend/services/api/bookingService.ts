@@ -34,7 +34,12 @@ export const bookingApiService = {
     },
     getAll: async (userId: number): Promise<Booking[]> => {
         const response = await api.get<Booking[]>(`/booking/user/${userId}`);
-        return response.data
+        if (response.status >= 200 && response.status < 300) {
+            return response.data;
+        } else {
+            console.error(`Failed to fetch bookings: ${response.status} - ${response.statusText}`);
+            return [];
+        }
     },
     update: async (event: Booking): Promise<Booking> => {
         const response = await publicApi.put<Booking>(`/booking/}`, event);

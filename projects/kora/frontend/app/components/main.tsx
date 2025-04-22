@@ -15,13 +15,13 @@ import '@schedule-x/theme-default/dist/index.css'
 import { timeService } from '../../services/utils/timeService'
 import { format} from 'date-fns';
 import { useUserStore } from '../store/userStore';
+import { dummyData } from '../../services/utils/dummyData';
 
 function MainContent() {
     const eventsService = useState(() => createEventsServicePlugin())[0]
     const { organizer} = useUserStore();
     const [isMounted, setIsMounted] = useState(false);
     const [upcomingEvents, setUpcomingEvents] = useState<CalendarEventExternal[]>([])
-    const [today, setToday] = useState("")
 
     var calendar = useNextCalendarApp({
         views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
@@ -30,8 +30,12 @@ function MainContent() {
     }, [eventsService]);
 
     const getEvents = async (userId: number) => {
+        dummyData.persistLocalStorage(userId)
         const bookings = await bookingApiService.getAll(userId);
-        const calendarEvents = bookings.map((booking: Booking) => ({
+        const dummyBookings = dummyData.getBookingsFromLocalStorage();
+        const mergedBookings = dummyBookings.concat(bookings);
+        console.log(JSON.stringify(mergedBookings))
+        const calendarEvents = mergedBookings.map((booking: Booking) => ({
             id: booking.id,
             title: `Booking with ${booking.guestEmail}`,
             start: new Date(booking.startTime).toISOString(),
@@ -50,9 +54,10 @@ function MainContent() {
         setUpcomingEvents(upcomingEvents.slice(0, 5));
         return calendarEvents;
     }
-
+``
     useEffect(() => {
         setIsMounted(true);
+       
         if (organizer.id != -1) {
             getEvents(organizer.id);
         }
