@@ -2,15 +2,30 @@
 
 import Link from 'next/link'
 import { useUserStore } from '../store/userStore'
-import { usePathname } from 'next/navigation'
+import { redirect, usePathname } from 'next/navigation'
 import { useBookingStore } from '../store/bookingStore'
-import { redirect } from 'next/navigation'
+
+
 export default function Menu({ isDrawer }: { isDrawer: boolean }) {
     const { resetStore } = useUserStore();
     const { resetStore: resetBookState } = useBookingStore();
     const pathname = usePathname();
 
     const drawerStyle = isDrawer ? 'menu bg-base-200 text-base-content min-h-full w-80 p-4' : 'menu';
+    const handleLogout = async () => {
+        const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
+        const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
+        const returnTo = encodeURIComponent(process.env.NEXT_PUBLIC_FRONT_END || 'http://localhost:3000');
+        
+        const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
+  
+        try {
+          redirect(logoutUrl)
+         
+        } catch (error) {
+          console.error('Logout failed:', error);
+        }
+      };
 
     const isActive = (path: string) => {
         return pathname === path ? 'active' : '';
@@ -59,6 +74,7 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
                 <button onClick={async () => {
                     resetStore();
                     resetBookState();
+                    handleLogout();
                     redirect('/auth/logout');
                 }}>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">

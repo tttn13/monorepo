@@ -62,7 +62,7 @@ export function withRegistrationCheck<P extends object>(
                     router.push('/login');
                 }
             }
-
+            console.log("in auth check page, isRegistere is", isRegistered, organizer?.email)
             if (isRegistered && organizer?.email) {
                 return;
             }

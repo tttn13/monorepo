@@ -12,8 +12,3 @@ export const auth0 = new Auth0Client({
   },
 })
 
-console.log({
-  baseURL: process.env.NEXT_PUBLIC_FRONT_END,
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
-  clientID: process.env.AUTH0_CLIENT_ID,
-});

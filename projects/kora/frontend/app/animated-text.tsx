@@ -33,7 +33,6 @@ function Hero() {
     <div className="w-full">
       <div className="container mx-auto">
         <h2 className={`${sans.className} text-2xl font-bold text-center pt-8 mt-8`}>ZUCAL</h2>
-
         <div className="flex gap-8 py-20 items-center justify-center flex-col">
           <div className="flex gap-4 flex-col">
             <h1 className="text-5xl md:text-7xl max-w-2xl tracking-tighter text-center font-regular">

@@ -2,10 +2,9 @@
 
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation'
 import { useUserStore } from '../store/userStore'
 import { useBookingStore } from '../store/bookingStore';
-import { redirect } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation'
 
 export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +16,22 @@ export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
     const isActive = (path: string) => {
         return pathname === path ? 'active' : '';
     };
+    
+    const handleLogout = async () => {
+        const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
+        const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
+        const returnTo = encodeURIComponent(process.env.NEXT_PUBLIC_FRONT_END || 'http://localhost:3000');
+        
+        const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
+  
+        try {
+          redirect(logoutUrl)
+         
+        } catch (error) {
+          console.error('Logout failed:', error);
+        }
+      };
+
     return (
         <div className="drawer">
             <input id="my-drawer" type="checkbox" className="drawer-toggle"
@@ -69,6 +84,7 @@ export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
                         <button onClick={async () => {
                             resetBookState();
                             resetStore();
+                            handleLogout();
                             redirect('/auth/logout');
                         }}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">

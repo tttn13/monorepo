@@ -10,12 +10,14 @@
     "verify-build": "next build && ls -la .next/standalone && test -f .next/standalone/server.js"
   },
   "dependencies": {
-    "@auth0/nextjs-auth0": "^4.0.0-beta.0",
+    "@auth0/auth0-react": "github:auth0/auth0-react",
+    "@auth0/nextjs-auth0": "^4.4.2",
     "@prisma/client": "^6.3.0",
     "@schedule-x/calendar-controls": "^2.17.0",
     "@schedule-x/events-service": "^2.17.0",
     "@schedule-x/react": "^2.13.3",
     "@schedule-x/theme-default": "^2.15.0",
+    "auth0": "^4.22.0",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",

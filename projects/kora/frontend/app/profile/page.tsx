@@ -48,6 +48,8 @@ function ProfilePage() {
 
             setOrganizer(response)
 
+            console.log("organizer is", response)
+
             setLoading(false)
 
         } catch (error) {

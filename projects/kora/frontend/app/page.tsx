@@ -1,5 +1,5 @@
 'use client'
-import { Josefin_Sans,Lexend } from 'next/font/google'
+import { Josefin_Sans, Lexend } from 'next/font/google'
 import { AuroraBackground } from "./aurora-background";
 import { Hero } from './animated-text'
 
@@ -26,5 +26,6 @@ export default function Home() {
         </footer>
       </AuroraBackground>
     </div>
+    
   )
 }
