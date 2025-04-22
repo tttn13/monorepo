@@ -62,11 +62,20 @@ export function withRegistrationCheck<P extends object>(
                     router.push('/login');
                 }
             }
+            
+            const storedIsRegistered = JSON.parse(localStorage.getItem('isRegistered') || 'false');
+            const storedOrganizer = JSON.parse(localStorage.getItem('organizer') || '{}');
+            console.log("Retrieved isRegistered from localStorage:", storedIsRegistered);
+            console.log("Retrieved storedOrganizer from localStorage:", storedOrganizer);
+
+            if (storedIsRegistered === true && Object.keys(storedOrganizer).length > 0) {
+                return
+            }
+
             console.log("in auth check page, isRegistere is", isRegistered, organizer?.email)
             if (isRegistered && organizer?.email) {
                 return;
             }
-
             setLoading(true)
             handleAuth();
             setLoading(false)

@@ -29,6 +29,7 @@ export const useUserStore = create<UserState>()(
 
             updateRegistered: (registered: boolean) => {
                 set({ isRegistered: registered })
+                localStorage.setItem('isRegistered', JSON.stringify(registered)); 
             },
 
             setOrganizer: (newUser: User) => {
@@ -41,6 +42,7 @@ export const useUserStore = create<UserState>()(
                         photo: newUser.photo
                     }
                 })
+                localStorage.setItem('organizer', JSON.stringify(newUser));
             },
 
             resetStore: () => {
@@ -57,6 +59,8 @@ export const useUserStore = create<UserState>()(
                     isRegistered: false,
                 });
                 localStorage.removeItem('user-storage');
+                localStorage.removeItem('isRegistered'); 
+                localStorage.removeItem('organizer'); // Clear organizer from localStorage
             },
         }),
             {
