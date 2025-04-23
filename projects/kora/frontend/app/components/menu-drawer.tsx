@@ -18,18 +18,16 @@ export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
     };
     
     const handleLogout = async () => {
+        resetStore();
+        resetBookState();
+
         const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
         const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
         const returnTo = encodeURIComponent(process.env.NEXT_PUBLIC_FRONT_END || 'http://localhost:3000');
-        
+
         const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
-  
-        try {
-        //   redirect(logoutUrl)
-          window.location.href = '/auth/logout';
-        } catch (error) {
-          console.error('Logout failed:', error);
-        }
+
+        window.location.replace(logoutUrl);
       };
 
     return (
@@ -82,8 +80,6 @@ export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
                     </li>
                     <li className={`m-2 p-2 ${isActive('/auth/logout')}`}>
                         <button onClick={async () => {
-                            resetBookState();
-                            resetStore();
                             handleLogout();
                         }}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">

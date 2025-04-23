@@ -13,20 +13,17 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
 
     const drawerStyle = isDrawer ? 'menu bg-base-200 text-base-content min-h-full w-80 p-4' : 'menu';
     const handleLogout = async () => {
+        resetStore();
+        resetBookState();
+
         const domain = process.env.NEXT_PUBLIC_AUTH0_DOMAIN;
         const clientId = process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID;
         const returnTo = encodeURIComponent(process.env.NEXT_PUBLIC_FRONT_END || 'http://localhost:3000');
-        
+
         const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
-  
-        try {
-            window.location.href = '/auth/logout';
-        //   redirect(logoutUrl)
-         
-        } catch (error) {
-          console.error('Logout failed:', error);
-        }
-      };
+
+        window.location.replace(logoutUrl);
+    };
 
     const isActive = (path: string) => {
         return pathname === path ? 'active' : '';
@@ -73,11 +70,9 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
             </li>
             <li className={`m-2 p-2 ${isActive('/auth/logout')}`}>
                 <button onClick={async () => {
-                    resetStore();
-                    resetBookState();
                     handleLogout();
                 }}>
-                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                         <path fillRule="evenodd" d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z" clipRule="evenodd" />
                     </svg>
                     <h3 className='font-bold text-base'>Log Out</h3></button>
