@@ -28,6 +28,7 @@ export default function MenuDrawer({ isDrawer }: { isDrawer: boolean }) {
         const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
 
         window.location.replace(logoutUrl);
+        redirect("/auth/logout")
       };
 
     return (

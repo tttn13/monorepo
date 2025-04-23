@@ -23,6 +23,7 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
         const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
 
         window.location.replace(logoutUrl);
+        redirect("/auth/logout")
     };
 
     const isActive = (path: string) => {
