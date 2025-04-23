@@ -20,7 +20,8 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
         const logoutUrl = `https://${domain}/v2/logout?client_id=${clientId}`;
   
         try {
-          redirect(logoutUrl)
+            window.location.href = '/auth/logout';
+        //   redirect(logoutUrl)
          
         } catch (error) {
           console.error('Logout failed:', error);
@@ -75,7 +76,6 @@ export default function Menu({ isDrawer }: { isDrawer: boolean }) {
                     resetStore();
                     resetBookState();
                     handleLogout();
-                    redirect('/auth/logout');
                 }}>
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                         <path fillRule="evenodd" d="M8.25 3.75H19.5a.75.75 0 0 1 .75.75v11.25a.75.75 0 0 1-1.5 0V6.31L5.03 20.03a.75.75 0 0 1-1.06-1.06L17.69 5.25H8.25a.75.75 0 0 1 0-1.5Z" clipRule="evenodd" />
